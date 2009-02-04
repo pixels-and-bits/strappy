@@ -1,0 +1,55 @@
+# specify an alternate gems repository
+# source: http://local_mirror.example.com
+# specify a different gem command
+# gem_command: 'jruby -S gem'
+gems:
+  # - name: postgres
+  #   # the version to use
+  #   version: '0.7.1'
+  #   # use a specfic source URL
+  #   source: 'http://mongrel.rubyforge.org/releases'
+  #   # load with GemTools.load_gems
+  #   load: true
+  #   # any extra config that needs to be passed to gem install
+  #   config: '--with-pgsql-include-dir=/usr/local/pgsql/include --with-pgsql-lib-dir=/usr/local/pgsql/lib'
+  #   # require name is different than the gem name
+  #   require_name: foo-bar
+
+  - name: 'rails'
+    version: '2.3.0'
+
+  - name: 'config_reader'
+    version: '0.0.5'
+    load: true
+
+  - name: 'rspec'
+    version: '1.1.15'
+
+  - name: 'rspec-rails'
+    version: '1.1.15'
+
+  - name: 'mergulhao-rcov'
+    version: '0.8.1.5.0'
+    source: 'http://gems.github.com'
+
+  - name: 'capistrano'
+    version: '2.5.0'
+
+  - name: 'capistrano-ext'
+    version: '1.2.1'
+
+  - name: 'RedCloth'
+    version: '4.1.1'
+    load: true
+
+  - name: 'mislav-will_paginate'
+    require_name: 'will_paginate'
+    version: '2.3.6'
+    load: true
+    source: 'http://gems.github.com'
+
+  - name: 'rubyist-aasm'
+    require_name: 'aasm'
+    version: '2.0.2'
+    laod: true
+    source: 'http://gems.github.com'

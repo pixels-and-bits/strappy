@@ -1,0 +1,9 @@
+defaults:
+  site_url: http://localhost:3000
+  site_name: CHANGE_ME
+  admin_email: admin@CHANGE_ME.com
+  blackbird: true
+
+production:
+  site_url: http://CHANGE_ME.com
+  blackbird: false

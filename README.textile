@@ -1,0 +1,6 @@
+h1. Strappy
+
+Bootstrap a Rails 2.3 app with a template
+
+h2. Usage
+rails -m http://github.com/pixels-and-bits/strappy/ app_name
