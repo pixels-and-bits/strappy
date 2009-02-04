@@ -1,5 +1,5 @@
 # use this for local installs
-SOURCE='/Users/mmoen/tmp/rails_templates/template'
+SOURCE='http://github.com/pixels-and-bits/strappy/raw/master'
 
 # puts SOURCE
 
