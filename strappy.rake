@@ -14,7 +14,8 @@ namespace :strappy do
     :acts_as_rated => 'svn://rubyforge.org/var/svn/acts-as-rated/trunk/acts_as_rated',
     :core_extensions => 'git@github.com:UnderpantsGnome/core_extensions.git',
     :acts_as_solr => 'git://github.com/railsfreaks/acts_as_solr.git',
-    :solr_pagination => 'git://github.com/dfl/solr_pagination.git'
+    :solr_pagination => 'git://github.com/dfl/solr_pagination.git',
+    :vasco => 'git://github.com/relevance/vasco.git'
   }
 
   desc 'List all plugins available to quick install'
