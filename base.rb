@@ -24,7 +24,7 @@ run 'echo N\n | haml --rails .'
 run 'mkdir -p public/stylesheets/sass'
 %w( main reset ).each do |file|
   file "public/stylesheets/sass/#{file}.sass",
-    open("#{SOURCE}/#{file}.sass")
+    open("#{SOURCE}/#{file}.sass").read
 end
 git :add => "."
 git :commit => "-a -m 'Added Haml and Sass stylesheets'"
