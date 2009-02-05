@@ -174,17 +174,14 @@ git :add => "."
 git :commit => "-a -m 'Added Blackbird'"
 
 # Add ApplicationHelper
-inside('app/helpers') do
-  file 'application_helper.rb', open("#{SOURCE}/application_helper.rb").read
-end
+file 'app/helpers/application_helper.rb',
+  open("#{SOURCE}/application_helper.rb").read
 git :add => "."
 git :commit => "-a -m 'Added ApplicationHelper'"
 
 # Add ApplicationController
-inside('app/controllers') do
-  file 'application_controller.rb',
-    open("#{SOURCE}/application_controller.rb").read
-end
+file 'app/controllers/application_controller.rb',
+  open("#{SOURCE}/application_controller.rb").read
 git :add => "."
 git :commit => "-a -m 'Added ApplicationController'"
 
@@ -192,6 +189,7 @@ git :commit => "-a -m 'Added ApplicationController'"
 git :rm => 'public/index.html'
 generate :rspec_controller, 'home'
 route "map.root :controller => 'home'"
+file 'app/views/home/index.html.haml', '%h1 Welcome'
 git :add => "."
 git :commit => "-a -m 'Removed index.html. Added HomeController'"
 
