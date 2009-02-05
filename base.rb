@@ -196,4 +196,6 @@ git :commit => "-a -m 'Removed index.html. Added HomeController'"
 
 puts "\n#{'*' * 80}\n\n"
 puts "Be sure to clean up the views converted to Haml (fix indenting, remove - end)"
+puts "  app/views/sessions/new.html.haml"
+puts "  app/views/users/new.html.haml"
 puts "\n#{'*' * 80}\n\n"
