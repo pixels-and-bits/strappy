@@ -1,14 +1,13 @@
 # use this for local installs
-SOURCE='http://github.com/pixels-and-bits/strappy/raw/master'
-
-# puts SOURCE
+SOURCE=ENV['LOCAL'] || 'http://github.com/pixels-and-bits/strappy/raw/master'
 
 # Git
 file '.gitignore', open("#{SOURCE}/gitignore").read
 git :init
 git :add => '.gitignore'
+run 'rm -f public/images/rails.png'
+run 'cp config/database.yml config/database.template.yml'
 git :add => "."
-git :rm => 'public/images/rails.png -f'
 git :commit => "-a -m 'Initial commit'"
 
 # Haml, doing this before gemtools install since we are using 2.1
@@ -23,9 +22,9 @@ end
 
 run 'echo N\n | haml --rails .'
 run 'mkdir -p public/stylesheets/sass'
-%w( main reset ).each do |env|
-  file "public/stylesheets/sass/#{env}.sass",
-    open("#{SOURCE}/#{env}.sass")
+%w( main reset ).each do |file|
+  file "public/stylesheets/sass/#{file}.sass",
+    open("#{SOURCE}/#{file}.sass")
 end
 git :add => "."
 git :commit => "-a -m 'Added Haml and Sass stylesheets'"
@@ -37,14 +36,24 @@ run 'sudo gemtools install'
 git :add => "."
 git :commit => "-a -m 'Added GemTools config'"
 
+# CoreExtensions
+# plugin 'core_extensions',
+#   :git => 'git@github.com:UnderpantsGnome/core_extensions.git'
+# git :add => "."
+# git :commit => "-a -m 'Added Core Extensions'"
+
 # Application Layout
 file 'app/views/layouts/application.html.haml',
   open("#{SOURCE}/application.html.haml").read
 git :add => "."
 git :commit => "-a -m 'Added Layout'"
 
+# install strappy rake tasks
+rakefile 'strappy.rake', open("#{SOURCE}/strappy.rake").read
+
 # RSpec
 generate 'rspec'
+file 'spec/rcov.opts', open("#{SOURCE}/rcov.opts").read
 git :add => "."
 git :commit => "-a -m 'Added RSpec'"
 
@@ -99,15 +108,33 @@ run './script/generate authenticated user sessions \
 # Sassify the templates
 inside('app/views/users/') do
   run 'html2haml -r new.html.erb new.html.haml && rm new.html.erb'
+  # no idea what this file is...
+  run 'rm _user_bar.html.erb' if File.exist?('_user_bar.html.erb')
 end
 
 inside('app/views/sessions/') do
   run 'html2haml -r new.html.erb new.html.haml && rm new.html.erb'
 end
 
+# add routes
+route open("#{SOURCE}/restful_auth_routes.rb").read
+
 rake('db:migrate')
 git :add => "."
 git :commit => "-a -m 'Added RESTful Authentication'"
+
+# jRails
+plugin 'jrails', :svn => 'http://ennerchi.googlecode.com/svn/trunk/plugins/jrails'
+
+# remove the installed files, we're using a newer version below
+inside('public/javascripts') do
+  %w( jquery-ui.js jquery.js ).each do |file|
+    run "rm -f #{file}"
+  end
+end
+
+git :add => "."
+git :commit => "-a -m 'Added jRails plugin'"
 
 # jQuery
 git :rm => "public/javascripts/*"
@@ -131,11 +158,6 @@ JS
 
 git :add => "."
 git :commit => "-a -m 'Added jQuery with UI and form plugin'"
-
-# jRails
-plugin 'jrails', :svn => 'http://ennerchi.googlecode.com/svn/trunk/plugins/jrails'
-git :add => "."
-git :commit => "-a -m 'Added jRails plugin'"
 
 # Blackbird
 run 'mkdir -p public/blackbird'
@@ -164,3 +186,14 @@ inside('app/controllers') do
 end
 git :add => "."
 git :commit => "-a -m 'Added ApplicationController'"
+
+# Remove index.html and add HomeController
+git :rm => 'public/index.html'
+generate :rspec_controller, 'home'
+route "map.root :controller => 'home'"
+git :add => "."
+git :commit => "-a -m 'Removed index.html. Added HomeController'"
+
+puts "\n#{'*' * 80}\n\n"
+puts "Be sure to clean up the views converted to Haml (fix indenting, remove - end)"
+puts "\n#{'*' * 80}\n\n"
