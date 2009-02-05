@@ -55,5 +55,5 @@ gems:
     source: 'http://gems.github.com'
 
   - name: 'expose_model'
-    version: '0.0.1'
+    version: '0.0.2'
     load: true
