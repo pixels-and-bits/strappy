@@ -92,19 +92,19 @@ inside('vendor/plugins') do
 end
 
 plugin 'restful_authentication',
-  :git => 'git://github.com/technoweenie/restful-authentication.git'
+  :git => 'git://github.com/UnderpantsGnome/restful_authentication.git'
 
-inside('vendor/plugins') do
-  run 'mv ./restful-authentication ./restful_authentication'
-end
+# inside('vendor/plugins') do
+#   run 'mv ./restful-authentication ./restful_authentication'
+# end
 
 # for some reason rails complains about AASM unless we have this
 gem 'rubyist-aasm', :lib => 'aasm', :source => 'http://gems.github.com'
 
 run './script/generate authenticated user sessions \
-  --include-activation \
-  --aasm \
-  --rspec'
+--include-activation \
+--aasm \
+--rspec'
 
 # Sassify the templates
 inside('app/views/users/') do
