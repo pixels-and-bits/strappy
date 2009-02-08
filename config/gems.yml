@@ -48,11 +48,9 @@ gems:
     load: true
     source: 'http://gems.github.com'
 
-  - name: 'rubyist-aasm'
-    require_name: 'aasm'
-    version: '2.0.2'
+  - name: 'authlogic'
+    version: '1.4.0'
     laod: true
-    source: 'http://gems.github.com'
 
   - name: 'expose_model'
     version: '0.0.2'
