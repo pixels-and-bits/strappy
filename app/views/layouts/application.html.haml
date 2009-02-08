@@ -22,7 +22,7 @@
     #container
       #header
         %ul
-          - if logged_in?
+          - if current_user
             %li= link_to 'Logout', logout_path
           - else
             %li= link_to 'Login', login_path
