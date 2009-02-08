@@ -100,10 +100,10 @@ run './script/generate authenticated user session \
 --rspec'
 
 # add in the user_observer
-environment ' config.active_record.observers = :user_observer'
+environment 'config.active_record.observers = :user_observer'
 
 # for some reason rails complains about AASM unless we have this
-gem ' rubyist-aasm', :lib => 'aasm', :source => 'http://gems.github.com'
+gem 'rubyist-aasm', :lib => 'aasm', :source => 'http://gems.github.com'
 
 # Sassify the templates
 inside('app/views/users/') do
