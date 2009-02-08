@@ -222,17 +222,3 @@ git :commit => "-a -m 'Removed index.html. Added HomeController'"
 puts "\n#{'*' * 80}\n\n"
 puts "All done. Enjoy."
 puts "\n#{'*' * 80}\n\n"
-
-module Rails
-  class TemplateRunner
-    def file_inject(file_name, sentinel, string, before_after=:after)
-      gsub_file file_name, /(#{Regexp.escape(sentinel)})/mi do |match|
-        if :after == before_after
-          "#{match}\n#{string}\n"
-        else
-          "#{string}\n#{match}\n"
-        end
-      end
-    end
-  end
-end
