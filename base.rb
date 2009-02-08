@@ -33,7 +33,7 @@ git :commit => "-a -m 'Added Haml and Sass stylesheets'"
 file 'config/gems.yml', open("#{SOURCE}/gems.yml").read
 run 'sudo gem install gem_tools --no-rdoc --no-ri'
 run 'sudo gemtools install'
-file 'config/initializers/gem_tools.rb', "require 'gem_tools'\nGemTools.load_gems"
+initializer 'gem_tools.rb', "require 'gem_tools'\nGemTools.load_gems"
 git :add => "."
 git :commit => "-a -m 'Added GemTools config'"
 
@@ -70,7 +70,7 @@ git :add => "."
 git :commit => "-a -m 'Added cruise rake task'"
 
 # Capistrano
-run 'capify .'
+capify!
 file 'config/deploy.rb', open("#{SOURCE}/deploy.rb").read
 
 %w( production staging ).each do |env|
@@ -94,17 +94,16 @@ end
 plugin 'restful_authentication',
   :git => 'git://github.com/UnderpantsGnome/restful_authentication.git'
 
-# inside('vendor/plugins') do
-#   run 'mv ./restful-authentication ./restful_authentication'
-# end
-
-# for some reason rails complains about AASM unless we have this
-gem 'rubyist-aasm', :lib => 'aasm', :source => 'http://gems.github.com'
-
-run './script/generate authenticated user sessions \
+run './script/generate authenticated user session \
 --include-activation \
 --aasm \
 --rspec'
+
+# add in the user_observer
+environment ' config.active_record.observers = :user_observer'
+
+# for some reason rails complains about AASM unless we have this
+gem ' rubyist-aasm', :lib => 'aasm', :source => 'http://gems.github.com'
 
 # Sassify the templates
 inside('app/views/users/') do
