@@ -1,4 +1,4 @@
-h1. Strappy
+h1. Strappy - restful_authentication
 
 Bootstrap a Rails 2.3 app with a template
 
