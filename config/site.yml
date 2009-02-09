@@ -1,9 +1,14 @@
 defaults:
   site_url: http://localhost:3000
+  host_name: CHANGE_ME.com
+  mail_from: noreply@CHANGE_ME.com
   site_name: CHANGE_ME
   admin_email: admin@CHANGE_ME.com
   blackbird: true
 
 production:
   site_url: http://CHANGE_ME.com
+  blackbird: false
+
+test:
   blackbird: false

@@ -9,13 +9,7 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
 
-  rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
-
   protected
-    # Automatically respond with 404 for ActiveRecord::RecordNotFound
-    def record_not_found
-      render :file => Rails.root.join('public', '404.html'), :status => 404
-    end
 
     def blackbird_override
       if 'true' == params[:force_blackbird]
@@ -36,7 +30,7 @@ class ApplicationController < ActionController::Base
       unless current_user
         store_location
         flash[:notice] = "You must be logged in to access this page"
-        redirect_to new_user_session_url
+        redirect_to login_url
         return false
       end
     end

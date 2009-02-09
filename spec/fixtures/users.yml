@@ -1,0 +1,17 @@
+---
+mmoen:
+  id: 1
+  last_login_at:
+  updated_at: 2009-02-08 23:30:18 Z
+  last_request_at: 2009-02-08 23:30:18 Z
+  crypted_password: e77096267e1cc7def16494ce93a71b5f12f8d79c364acc561d1ebea17f3f3ccc2f93f658e6e0ea959fe857a9d2e6425994d3995e1b7d9de124f24b0868e25963
+  perishable_token: ''
+  current_login_ip: 127.0.0.1
+  password_salt: c669868daadffa20f9c628c9555796e39d53fb707f373cd7352db658bad4c3e37d9b2d0ccd6ec99abbe547d128faa62266143e0d08dcac55454ca0d4eff442b4
+  current_login_at: 2009-02-08 23:30:18 Z
+  persistence_token: b10fb7f58a7bfcb033303ea6ab9f9d30e24fefbeb245518659568a484422a1191fdfe6e4cfbb8c057e0ff78453b084f3ab59dd6b9630685e53aa6aa0663380d1
+  login_count: 1
+  login: mmoen
+  last_login_ip:
+  email: michael@pixels-and-bits.com
+  created_at: 2009-02-08 23:30:18 Z

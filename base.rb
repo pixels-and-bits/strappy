@@ -1,5 +1,5 @@
 # use this for local installs
-SOURCE=ENV['LOCAL'] || 'http://github.com/pixels-and-bits/strappy/raw/master'
+SOURCE=ENV['LOCAL'] || 'http://github.com/pixels-and-bits/strappy/raw/authlogic'
 
 # Git
 file '.gitignore', open("#{SOURCE}/gitignore").read
@@ -11,9 +11,11 @@ git :add => "."
 git :commit => "-a -m 'Initial commit'"
 
 # Haml, doing this before gemtools install since we are using 2.1
-inside('tmp') do
-  run 'rm -rf ./haml' if File.exist?('haml')
-  run 'git clone git://github.com/nex3/haml.git'
+unless File.exist?('tmp/haml')
+  inside('tmp') do
+    run 'rm -rf ./haml' if File.exist?('haml')
+    run 'git clone git://github.com/nex3/haml.git'
+  end
 end
 
 inside('tmp/haml') do
@@ -79,12 +81,6 @@ end
 git :add => "."
 git :commit => "-a -m 'Added Capistrano config'"
 
-# Setup AR Sessions
-rake('db:sessions:create')
-rake('db:migrate')
-git :add => "."
-git :commit => "-a -m 'Added AR Sessions'"
-
 # jRails
 plugin 'jrails', :svn => 'http://ennerchi.googlecode.com/svn/trunk/plugins/jrails'
 
@@ -145,6 +141,14 @@ file 'app/controllers/application_controller.rb',
   open("#{SOURCE}/app/controllers/application_controller.rb").read
 git :add => "."
 git :commit => "-a -m 'Added ApplicationController'"
+
+# Remove index.html and add HomeController
+git :rm => 'public/index.html'
+generate :rspec_controller, 'home'
+route "map.root :controller => 'home'"
+file 'app/views/home/index.html.haml', '%h1 Welcome'
+git :add => "."
+git :commit => "-a -m 'Removed index.html. Added HomeController'"
 
 # Setup Authlogic
 # rails gets cranky when this isn't included in the config
@@ -207,17 +211,32 @@ end
   file "app/views/#{name}", open("#{SOURCE}/app/views/#{name}").read
 end
 
+# testing goodies
+gsub_file 'spec/spec_helper.rb', /(#{Regexp.escape("require 'spec/rails'")})/mi do |match|
+  <<-EOM
+#{match}
+require 'authlogic/testing/test_unit_helpers'
+  EOM
+end
+
+# specs
+run 'mkdir -p spec/fixtures'
+
+%w(
+  fixtures/users.yml
+  controllers/application_controller_spec.rb
+  controllers/home_controller_spec.rb
+  controllers/password_reset_controller_spec.rb
+  controllers/user_sessions_controller_spec.rb
+  controllers/users_controller_spec.rb
+  views/home/index.html.haml_spec.rb
+).each do |name|
+  file "spec/#{name}", open("#{SOURCE}/spec/#{name}").read
+end
+
 rake('db:migrate')
 git :add => "."
 git :commit => "-a -m 'Added Authlogic'"
-
-# Remove index.html and add HomeController
-git :rm => 'public/index.html'
-generate :rspec_controller, 'home'
-route "map.root :controller => 'home'"
-file 'app/views/home/index.html.haml', '%h1 Welcome'
-git :add => "."
-git :commit => "-a -m 'Removed index.html. Added HomeController'"
 
 puts "\n#{'*' * 80}\n\n"
 puts "All done. Enjoy."
