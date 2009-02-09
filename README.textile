@@ -4,4 +4,4 @@ Bootstrap a Rails 2.3 app with a template
 
 h2. Usage
 
-  rails -m http://github.com/pixels-and-bits/strappy/raw/master/base.rb app_name
+  rails -m http://github.com/pixels-and-bits/strappy/raw/restful_authentication/base.rb app_name

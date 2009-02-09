@@ -1,5 +1,5 @@
 # use this for local installs
-SOURCE=ENV['LOCAL'] || 'http://github.com/pixels-and-bits/strappy/raw/master'
+SOURCE=ENV['LOCAL'] || 'http://github.com/pixels-and-bits/strappy/raw/restful_authentication'
 
 # Git
 file '.gitignore', open("#{SOURCE}/gitignore").read
