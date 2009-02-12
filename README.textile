@@ -23,7 +23,7 @@ intended application templates to do by bringing in controllers and specs.
   
 h3. gems
 
-  * ConfigReader to manage gems and versions
+  * GemTools to manage gems and versions
   * SiteConfig to manage the app congiguration
   * RSpec for testing
   * Rcov to help make sure you are testing
