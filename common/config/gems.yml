@@ -48,10 +48,6 @@ gems:
     load: true
     source: 'http://gems.github.com'
 
-  - name: 'authlogic'
-    version: '1.4.1'
-    laod: true
-
   - name: 'expose_model'
     version: '0.0.2'
     load: true

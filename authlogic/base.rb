@@ -1,4 +1,10 @@
 # Setup Authlogic
+
+# add gems to gems.yml
+file_append('config/gems.yml',
+  open("#{SOURCE}/restful_authentication/config/gems.yml").read)
+run 'sudo gemtools install'
+
 # rails gets cranky when this isn't included in the config
 gem 'authlogic'
 generate 'session user_session'
@@ -31,18 +37,18 @@ route 'map.resources :password_reset'
 
 # migrations
 file Dir.glob('db/migrate/*_create_users.rb').first,
-  open("#{SOURCE}/db/migrate/create_users.rb").read
+  open("#{SOURCE}/authlogic/db/migrate/create_users.rb").read
 
 # models
 %w( user notifier ).each do |name|
   file "app/models/#{name}.rb",
-    open("#{SOURCE}/app/models/#{name}.rb").read
+    open("#{SOURCE}/authlogic/app/models/#{name}.rb").read
 end
 
 # controllers
 %w( user_sessions password_reset users ).each do |name|
   file "app/controllers/#{name}_controller.rb",
-    open("#{SOURCE}/app/controllers/#{name}_controller.rb").read
+    open("#{SOURCE}/authlogic/app/controllers/#{name}_controller.rb").read
 end
 
 # views
@@ -56,7 +62,7 @@ end
   users/new.html.haml
   users/show.html.haml
 ).each do |name|
-  file "app/views/#{name}", open("#{SOURCE}/app/views/#{name}").read
+  file "app/views/#{name}", open("#{SOURCE}/authlogic/app/views/#{name}").read
 end
 
 # testing goodies
@@ -73,15 +79,26 @@ run 'mkdir -p spec/fixtures'
 %w(
   fixtures/users.yml
   controllers/application_controller_spec.rb
-  controllers/home_controller_spec.rb
   controllers/password_reset_controller_spec.rb
   controllers/user_sessions_controller_spec.rb
   controllers/users_controller_spec.rb
-  views/home/index.html.haml_spec.rb
 ).each do |name|
-  file "spec/#{name}", open("#{SOURCE}/spec/#{name}").read
+  file "spec/#{name}", open("#{SOURCE}/authlogic/spec/#{name}").read
 end
 
 rake('db:migrate')
 git :add => "."
 git :commit => "-a -m 'Added Authlogic'"
+
+# Add ApplicationController
+file 'app/controllers/application_controller.rb',
+  open("#{SOURCE}/authlogic/app/controllers/application_controller.rb").read
+git :add => "."
+git :commit => "-a -m 'Added ApplicationController'"
+
+# Application Layout
+file 'app/views/layouts/application.html.haml',
+  open("#{SOURCE}/authlogic/app/views/layouts/application.html.haml").read
+git :add => "."
+git :commit => "-a -m 'Added Layout'"
+

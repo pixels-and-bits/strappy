@@ -30,8 +30,35 @@ inside('app/views/sessions/') do
 end
 
 # add routes
-route open("#{SOURCE}/config/restful_auth_routes.rb").read
+route open("#{SOURCE}/restful_authentication/config/restful_auth_routes.rb").read
+
+# add gems to gems.yml
+file_append('config/gems.yml',
+  open("#{SOURCE}/restful_authentication/config/gems.yml").read)
+run 'sudo gemtools install'
+
+# add observer
+lib 'user_observer.rb',
+  open("#{SOURCE}/restful_authentication/lib/user_observer.rb").read
 
 rake('db:migrate')
 git :add => "."
 git :commit => "-a -m 'Added RESTful Authentication'"
+
+# Add ApplicationController
+file 'app/controllers/application_controller.rb',
+  open("#{SOURCE}/restful_authentication/app/controllers/application_controller.rb").read
+git :add => "."
+git :commit => "-a -m 'Added ApplicationController'"
+
+# Application Layout
+file 'app/views/layouts/application.html.haml',
+  open("#{SOURCE}/restful_authentication/app/views/layouts/application.html.haml").read
+git :add => "."
+git :commit => "-a -m 'Added Layout'"
+
+puts "\n#{'*' * 80}\n\n"
+puts "Be sure to clean up the views converted to Haml (fix indenting, remove - end)"
+puts "  app/views/sessions/new.html.haml"
+puts "  app/views/users/new.html.haml"
+puts "\n#{'*' * 80}\n"
