@@ -150,7 +150,7 @@ git :commit => "-a -m 'Removed index.html. Added HomeController'"
 templ = case ask(<<-EOQ
 Choose an Authentication method:
                 1) Authlogic
-                2) Clearence
+                2) Clearance
                 3) restful_authentication
                 4) None of the above
 EOQ

@@ -101,4 +101,3 @@ file 'app/views/layouts/application.html.haml',
   open("#{SOURCE}/authlogic/app/views/layouts/application.html.haml").read
 git :add => "."
 git :commit => "-a -m 'Added Layout'"
-
