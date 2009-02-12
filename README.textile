@@ -1,8 +1,6 @@
-h1. Strappy - Authlogic
+h1. Strappy - Choosy
 
-Bootstrap a Rails 2.3 app with a template using Authlogic
-
-The original template that uses "restful_authentication":http://github.com/pixels-and-bits/strappy/tree/restful_authentication
+Bootstrap a Rails 2.3 app with a template
 
 h2. What does this thing have in it
 
@@ -15,7 +13,6 @@ h2. What does this thing have in it
   * CC.rb rake task
   * Capistrano with Staging and Production environments
   * A defualt 'home' controller in place of index.html
-  * A ready to go Authlogic setup for login with password resets
   * A strappy rake task to install commonly used plugins (lifted from Bort)
 
 Admittedly this thing kind of steps out side of the box in what I believe they 
@@ -23,17 +20,25 @@ intended application templates to do by bringing in controllers and specs.
   
 h3. gems
 
-  * ConfigReader to manage gems and versions
+  * GemTools to manage gems and versions
   * SiteConfig to manage the app congiguration
   * RSpec for testing
   * Rcov to help make sure you are testing
   * WillPaginate for pagination
-  * Authlogic to handle authentication
   * ExposeModel to tidy up your controllers and views
   
 h3. plugins
 
   * jRails to handle jQuery
+  
+h3. Authentication
+
+Choose your option from:
+
+  * A ready to go Authlogic app, with password resets
+  * A ready to go Clearance app
+  * A ready to go restful_authentication app
+  * Or none of the above
   
 h2. Usage
 
