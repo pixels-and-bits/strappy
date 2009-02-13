@@ -1,5 +1,5 @@
 # use this for local installs
-SOURCE=ENV['LOCAL'] || 'http://github.com/pixels-and-bits/strappy/raw/choosy'
+SOURCE=ENV['LOCAL'] || 'http://github.com/pixels-and-bits/strappy/raw/master'
 
 def file_append(file, data)
   File.open(file, 'a') {|f| f.write(data) }
