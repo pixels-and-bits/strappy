@@ -1,6 +1,8 @@
-h1. Strappy
+h1. Strappy - Authlogic
 
-Bootstrap a Rails 2.3 app with a template
+Bootstrap a Rails 2.3 app with a template using Authlogic
+
+The original template that uses "restful_authentication":http://github.com/pixels-and-bits/strappy/tree/restful_authentication
 
 h2. What does this thing have in it
 
