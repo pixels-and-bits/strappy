@@ -29,7 +29,7 @@ role :db, 'db.CHANGE_ME.com', :primary => true
 #############################################################
 
 set :scm, :git
-set :branch, 'master'
+set (:branch) { stage }
 set :scm_user, 'deploy'
 set :repository, "git@github.com:CHANGE_ME/#{application}.git"
 set (:deploy_to) { "/var/webapps/#{application}/website/#{stage}" }
