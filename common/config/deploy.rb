@@ -43,8 +43,9 @@ set :scm_verbose, true
 namespace :deploy do
   desc "This to do once we get the code up"
   task :after_update_code, :roles => :app, :except => { :no_release => true } do
-    send(run_method, "cd #{release_path} && sudo gemtools install")
-    deploy:migrate
+    run "cd #{release_path} && sudo gemtools install"
+    run "cd #{release_path} && RAILS_ENV=#{stage} ./script/runner Sass::Plugin.update_stylesheets"
+    run "cd #{release_path} && RAILS_ENV=#{stage} rake db:migrate"
   end
 
   #########################################################
