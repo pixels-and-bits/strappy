@@ -62,3 +62,11 @@ puts "Be sure to clean up the views converted to Haml (fix indenting, remove - e
 puts "  app/views/sessions/new.html.haml"
 puts "  app/views/users/new.html.haml"
 puts "\n#{'*' * 80}\n"
+
+@auth_message = <<-EOM
+restful_authentication installed
+
+Be sure to clean up the views converted to Haml (fix indenting, remove - end)
+  app/views/sessions/new.html.haml
+  app/views/users/new.html.haml
+EOM

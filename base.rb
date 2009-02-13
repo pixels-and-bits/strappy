@@ -5,6 +5,16 @@ def file_append(file, data)
   File.open(file, 'a') {|f| f.write(data) }
 end
 
+def file_inject(file_name, sentinel, string, before_after=:after)
+  gsub_file file_name, /(#{Regexp.escape(sentinel)})/mi do |match|
+    if :after == before_after
+      "#{match}\n#{string}"
+    else
+      "#{string}\n#{match}"
+    end
+  end
+end
+
 # Git
 file '.gitignore', open("#{SOURCE}/gitignore").read
 git :init
@@ -148,11 +158,12 @@ git :commit => "-a -m 'Removed index.html. Added HomeController'"
 
 # Setup Authentication
 templ = case ask(<<-EOQ
+
 Choose an Authentication method:
-                1) Authlogic
-                2) Clearance
-                3) restful_authentication
-                4) None of the above
+  1) Authlogic
+  2) Clearance
+  3) restful_authentication
+  4) None of the above
 EOQ
 ).to_s
   when '1'
@@ -168,5 +179,9 @@ end
 load_template(templ) unless templ.nil?
 
 puts "\n#{'*' * 80}\n\n"
+unless @auth_message.nil?
+  puts "#{@auth_message}"
+  puts ''
+end
 puts "All done. Enjoy."
 puts "\n#{'*' * 80}\n\n"

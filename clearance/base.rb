@@ -29,8 +29,53 @@ route "map.signup '/signup', :controller => 'users', :action => 'new'"
 git :add => "."
 git :commit => "-a -m 'Added Clearance'"
 
+crypto_name = nil
+crypto = case ask(<<-EOQ
+
+Which hashing algorithm do you want to use?
+  1) SHA1 (default in Clearance)
+  2) SHA512
+  3) BCrypt
+EOQ
+).to_s
+  when '2'
+    crypto_name = 'SHA512'
+    'include ClearanceCrypto::SHA512'
+  when '3'
+    crypto_name = 'BCrypt'
+    'include ClearanceCrypto::BCrypt'
+  else
+    nil
+end
+
+if crypto
+  file_append('config/gems.yml',
+    open("#{SOURCE}/clearance/config/clearance_crypto_gems.yml").read)
+
+  run 'sudo gemtools install'
+
+  file_inject('app/models/user.rb',
+    'class User < ActiveRecord::Base',
+    "require 'clearance_crypto/#{crypto_name.downcase}'\n",
+    :before
+  )
+
+  file_inject('app/models/user.rb',
+    'include Clearance::App::Models::User',
+    "  #{crypto}",
+    :after
+  )
+
+  git :add => '.'
+  git :commit => "-a -m 'Added ClearanceCrypto with #{crypto_name}'"
+end
+
 # Application Layout
 file 'app/views/layouts/application.html.haml',
   open("#{SOURCE}/authlogic/app/views/layouts/application.html.haml").read
+
 git :add => "."
 git :commit => "-a -m 'Added Layout'"
+
+@auth_message = 'Clearance authentication installed'
+@auth_message << " with #{crypto_name} hashing" unless crypto_name.nil?

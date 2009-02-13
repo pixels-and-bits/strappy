@@ -66,12 +66,11 @@ end
 end
 
 # testing goodies
-gsub_file 'spec/spec_helper.rb', /(#{Regexp.escape("require 'spec/rails'")})/mi do |match|
-  <<-EOM
-#{match}
-require 'authlogic/testing/test_unit_helpers'
-  EOM
-end
+file_inject('/spec/spec_helper.rb',
+  "require 'spec/rails'",
+  "require 'authlogic/testing/test_unit_helpers'\n",
+  :after
+)
 
 # specs
 run 'mkdir -p spec/fixtures'
@@ -101,3 +100,5 @@ file 'app/views/layouts/application.html.haml',
   open("#{SOURCE}/authlogic/app/views/layouts/application.html.haml").read
 git :add => "."
 git :commit => "-a -m 'Added Layout'"
+
+@auth_message = 'Authlogic authentication installed'
