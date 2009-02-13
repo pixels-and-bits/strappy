@@ -86,6 +86,11 @@ file 'config/deploy.rb', open("#{SOURCE}/common/config/deploy.rb").read
 %w( production staging ).each do |env|
   file "config/deploy/#{env}.rb", "set :rails_env, \"#{env}\""
 end
+
+inside('config/environments') do
+  run 'cp development.rb staging.rb'
+end
+
 git :add => "."
 git :commit => "-a -m 'Added Capistrano config'"
 
