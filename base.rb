@@ -128,7 +128,10 @@ plugin 'jrails', :svn => 'http://ennerchi.googlecode.com/svn/trunk/plugins/jrail
 
 # remove the installed files, we're using a newer version below
 inside('public/javascripts') do
-  %w( jquery-ui.js jquery.js ).each do |file|
+  %w(
+    jquery-ui.js
+    jquery.js
+  ).each do |file|
     run "rm -f #{file}"
   end
 end
@@ -137,7 +140,19 @@ git :add => "."
 git :commit => "-a -m 'Added jRails plugin'"
 
 # jQuery
-git :rm => "public/javascripts/*"
+
+# clean up prototype files
+inside('public/javascripts') do
+  %w(
+    application.js
+    controls.js
+    dragdrop.js
+    effects.js
+    prototype.js
+  ).each do |file|
+    run "rm -f #{file}"
+  end
+end
 
 file 'public/javascripts/jquery.js',
   open('http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js').read
@@ -152,7 +167,6 @@ file 'public/javascripts/jquery.form.js',
 
 file "public/javascripts/application.js", <<-JS
 $(function() {
-  // ...
 });
 JS
 
