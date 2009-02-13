@@ -1,0 +1,4 @@
+
+  - name: 'authlogic'
+    version: '1.4.1'
+    laod: true
