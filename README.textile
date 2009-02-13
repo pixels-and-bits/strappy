@@ -46,4 +46,4 @@ Choose your option from:
 
 h2. Usage
 
-  rails -m http://github.com/pixels-and-bits/strappy/raw/authlogic/base.rb app_name
+  rails -m http://github.com/pixels-and-bits/strappy/raw/master/base.rb app_name

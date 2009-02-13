@@ -90,7 +90,6 @@ git :add => "."
 git :commit => "-a -m 'Added Capistrano config'"
 
 # jRails
-# git :rm => "public/javascripts/*"
 plugin 'jrails', :svn => 'http://ennerchi.googlecode.com/svn/trunk/plugins/jrails'
 
 # remove the installed files, we're using a newer version below
