@@ -40,9 +40,9 @@ Choose your option from:
   * A ready to go restful_authentication app
   * Or none of the above
   
-  If you choose Clearance you will be given the option to choose a different 
-  hashing algorithm. The options are SHA512 or BCrypt (requires a gem), the 
-  default is SHA1
+If you choose Clearance you will be given the option to choose a different 
+hashing algorithm. The options are SHA512 or BCrypt (requires a gem), the 
+default is SHA1
 
 h2. Usage
 
