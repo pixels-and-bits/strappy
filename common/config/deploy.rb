@@ -3,7 +3,7 @@
 #############################################################
 require 'capistrano/ext/multistage'
 set :stages, %w(staging production)
-set :default_stage, "production"
+set :default_stage, "staging"
 set :application, "CHANGE_ME"
 
 #############################################################
@@ -32,7 +32,7 @@ set :scm, :git
 set :branch, 'master'
 set :scm_user, 'deploy'
 set :repository, "git@github.com:CHANGE_ME/#{application}.git"
-set :deploy_to, "/var/webapps/#{application}/website"
+set (:deploy_to) { "/var/webapps/#{application}/website/#{stage}" }
 set :deploy_via, :remote_cache
 set :scm_verbose, true
 
