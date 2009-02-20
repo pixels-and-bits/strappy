@@ -81,6 +81,7 @@ run 'mkdir -p spec/fixtures'
   controllers/password_reset_controller_spec.rb
   controllers/user_sessions_controller_spec.rb
   controllers/users_controller_spec.rb
+  views/home/index.html.haml_spec.rb
 ).each do |name|
   file "spec/#{name}", open("#{SOURCE}/authlogic/spec/#{name}").read
 end

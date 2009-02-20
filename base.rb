@@ -25,15 +25,17 @@ git :add => "."
 git :commit => "-a -m 'Initial commit'"
 
 # Haml, doing this before gemtools install since we are using 2.1
-unless File.exist?('tmp/haml')
-  inside('tmp') do
-    run 'rm -rf ./haml' if File.exist?('haml')
-    run 'git clone git://github.com/nex3/haml.git'
+if `gem list haml | grep 2.1.0`.chomp == ''
+  unless File.exist?('tmp/haml')
+    inside('tmp') do
+      run 'rm -rf ./haml' if File.exist?('haml')
+      run 'git clone git://github.com/nex3/haml.git'
+    end
   end
-end
 
-inside('tmp/haml') do
-  run 'rake install'
+  inside('tmp/haml') do
+    run 'rake install'
+  end
 end
 
 run 'echo N\n | haml --rails .'
@@ -156,11 +158,23 @@ file 'public/blackbird/blackbird.png',
 git :add => "."
 git :commit => "-a -m 'Added Blackbird'"
 
+# Add ApplicationController
+file 'app/controllers/application_controller.rb',
+  open("#{SOURCE}/common/app/controllers/application_controller.rb").read
+git :add => "."
+git :commit => "-a -m 'Added ApplicationController'"
+
 # Add ApplicationHelper
 file 'app/helpers/application_helper.rb',
   open("#{SOURCE}/common/app/helpers/application_helper.rb").read
 git :add => "."
 git :commit => "-a -m 'Added ApplicationHelper'"
+
+# Add Layout
+file 'app/views/layouts/application.html.haml',
+  open("#{SOURCE}/common/app/views/layouts/application.html.haml").read
+git :add => "."
+git :commit => "-a -m 'Added Layout'"
 
 # Remove index.html and add HomeController
 git :rm => 'public/index.html'
@@ -195,7 +209,11 @@ EOQ
     nil
 end
 
-load_template(templ) unless templ.nil?
+if templ.nil?
+
+else
+  load_template(templ)
+end
 
 puts "\n#{'*' * 80}\n\n"
 unless @auth_message.nil?
