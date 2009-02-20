@@ -1,7 +1,7 @@
 
   - name: 'thoughtbot-clearance'
     require_name: 'clearance'
-    version: '0.4.7'
+    version: '0.4.9'
     laod: true
     source: 'http://gems.github.com'
 
@@ -12,5 +12,5 @@
 
   - name: 'thoughtbot-factory_girl'
     require_name: 'factory_girl'
-    version: '1.1.5'
+    version: '1.2.0'
     source: 'http://gems.github.com'
