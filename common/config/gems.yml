@@ -33,7 +33,7 @@ gems:
     source: 'http://gems.github.com'
 
   - name: 'capistrano'
-    version: '2.5.0'
+    version: '2.5.5'
 
   - name: 'capistrano-ext'
     version: '1.2.1'
