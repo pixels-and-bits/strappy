@@ -1,7 +1,7 @@
 
   - name: 'thoughtbot-clearance'
     require_name: 'clearance'
-    version: '0.4.9'
+    version: '0.5.5'
     laod: true
     source: 'http://gems.github.com'
 

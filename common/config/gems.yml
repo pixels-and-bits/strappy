@@ -16,7 +16,7 @@ gems:
   #   require_name: foo-bar
 
   - name: 'rails'
-    version: '2.3.0'
+    version: '2.3.2'
 
   - name: 'config_reader'
     version: '0.0.5'
