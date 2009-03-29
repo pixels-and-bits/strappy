@@ -2,7 +2,9 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe UsersController do
   fixtures :users
-  setup :activate_authlogic
+  before do
+    activate_authlogic
+  end
 
   describe "actions requiring no current user" do
     it "should not redirect for a non-logged in user on :new" do
