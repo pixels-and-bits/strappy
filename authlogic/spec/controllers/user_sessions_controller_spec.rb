@@ -16,13 +16,13 @@ describe UserSessionsController do
     end
 
     it "should redirect for a logged in user on :new" do
-      UserSession.create(users(:mmoen))(users(:mmoen))
+      UserSession.create(users(:mmoen))
       get :new
       response.should be_redirect
     end
 
     it "should redirect for a logged in user on :create" do
-      UserSession.create(users(:mmoen))(users(:mmoen))
+      UserSession.create(users(:mmoen))
       get :create
       response.should be_redirect
     end
@@ -42,7 +42,7 @@ describe UserSessionsController do
     end
 
     it "should redirect to the login page on session deletion" do
-      UserSession.create(users(:mmoen))(users(:mmoen))
+      UserSession.create(users(:mmoen))
       post :destroy
       response.should redirect_to(login_path)
     end

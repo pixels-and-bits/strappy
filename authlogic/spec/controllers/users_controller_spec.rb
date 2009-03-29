@@ -16,13 +16,13 @@ describe UsersController do
     end
 
     it "should redirect for a logged in user on :new" do
-      UserSession.create(users(:mmoen))(users(:mmoen))
+      UserSession.create(users(:mmoen))
       get :new
       response.should be_redirect
     end
 
     it "should redirect for a logged in user on :create" do
-      UserSession.create(users(:mmoen))(users(:mmoen))
+      UserSession.create(users(:mmoen))
       get :create
       response.should be_redirect
     end
@@ -51,25 +51,25 @@ describe UsersController do
     end
 
     it "should not redirect to login on :show" do
-      UserSession.create(users(:mmoen))(users(:mmoen))
+      UserSession.create(users(:mmoen))
       get :show
       response.should_not be_redirect
     end
 
     it "should not redirect to login on :edit" do
-      UserSession.create(users(:mmoen))(users(:mmoen))
+      UserSession.create(users(:mmoen))
       get :edit
       response.should_not be_redirect
     end
 
     it "should redirect to account on :update" do
-      UserSession.create(users(:mmoen))(users(:mmoen))
+      UserSession.create(users(:mmoen))
       post :update, :user => { :email => 'new_valid_email@example.com' }
       response.should redirect_to(account_path)
     end
 
     it "should not redirect to account on failed :update" do
-      UserSession.create(users(:mmoen))(users(:mmoen))
+      UserSession.create(users(:mmoen))
       post :update, :user => { :email => 'not_a_valid_email' }
       response.should_not be_redirect
     end
