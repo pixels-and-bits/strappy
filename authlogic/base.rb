@@ -65,6 +65,13 @@ end
   file "app/views/#{name}", open("#{SOURCE}/authlogic/app/views/#{name}").read
 end
 
+# testing goodies
+file_inject('/spec/spec_helper.rb',
+  "require 'spec/rails'",
+  "require 'authlogic/test_case'\n",
+  :after
+)
+
 # specs
 run 'mkdir -p spec/fixtures'
 
