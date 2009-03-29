@@ -2,6 +2,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe UserSessionsController do
   fixtures :users
+  setup :activate_authlogic
 
   describe "actions requiring no current user" do
     it "should not redirect for a non-logged in user on :new" do
@@ -15,13 +16,13 @@ describe UserSessionsController do
     end
 
     it "should redirect for a logged in user on :new" do
-      set_session_for(users(:mmoen))
+      UserSession.create(users(:mmoen))(users(:mmoen))
       get :new
       response.should be_redirect
     end
 
     it "should redirect for a logged in user on :create" do
-      set_session_for(users(:mmoen))
+      UserSession.create(users(:mmoen))(users(:mmoen))
       get :create
       response.should be_redirect
     end
@@ -41,7 +42,7 @@ describe UserSessionsController do
     end
 
     it "should redirect to the login page on session deletion" do
-      set_session_for(users(:mmoen))
+      UserSession.create(users(:mmoen))(users(:mmoen))
       post :destroy
       response.should redirect_to(login_path)
     end

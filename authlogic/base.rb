@@ -65,13 +65,6 @@ end
   file "app/views/#{name}", open("#{SOURCE}/authlogic/app/views/#{name}").read
 end
 
-# testing goodies
-file_inject('/spec/spec_helper.rb',
-  "require 'spec/rails'",
-  "require 'authlogic/testing/test_unit_helpers'\n",
-  :after
-)
-
 # specs
 run 'mkdir -p spec/fixtures'
 
@@ -102,4 +95,4 @@ file 'app/views/layouts/application.html.haml',
 git :add => "."
 git :commit => "-a -m 'Added Layout'"
 
-@auth_message = 'Authlogic authentication installed'
+@auth_message = 'Authlogic installed'
