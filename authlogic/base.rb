@@ -2,7 +2,7 @@
 
 # add gems to gems.yml
 file_append('config/gems.yml',
-  open("#{SOURCE}/restful_authentication/config/gems.yml").read)
+  open("#{SOURCE}/authlogic/config/gems.yml").read)
 run 'sudo gemtools install'
 
 # rails gets cranky when this isn't included in the config
