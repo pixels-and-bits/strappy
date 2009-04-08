@@ -15,9 +15,9 @@ h2. What does this thing have in it
   * A defualt 'home' controller in place of index.html
   * A strappy rake task to install commonly used plugins, lifted from Bort and modified
 
-Admittedly this thing kind of steps out side of the box in what I believe they 
+Admittedly this thing kind of steps out side of the box in what I believe they
 intended application templates to do by bringing in controllers and specs.
-  
+
 h3. Gems
 
   * GemTools to manage gems and versions
@@ -27,13 +27,13 @@ h3. Gems
   * WillPaginate for pagination
   * ExposeModel to tidy up your controllers and views
   * FriendlyID for pretty URLs
-  
+
 h3. Installed plugins
 
   * jRails to handle jQuery
   * CoreExtensions, just a bunch of common hacks I find myself using
   * uberkit to make forms less painful
-  
+
 h3. Plugins available through rake strappy:install
 
   * acts_as_configurable
@@ -54,11 +54,11 @@ h3. Plugins available through rake strappy:install
   * workling
   * yarpie
 
-  
+
 h3. Authentication
 
-  * Authlogic
-  
-h2. Usage
+  * A ready to go Authlogic app, with password resets
+
+h3. Usage
 
   rails -m http://github.com/pixels-and-bits/strappy/raw/golden/base.rb app_name
