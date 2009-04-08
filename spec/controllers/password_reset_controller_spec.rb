@@ -3,6 +3,10 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 describe PasswordResetController do
   fixtures :users
 
+  before do
+    activate_authlogic
+  end
+
   describe "requesting a password reset" do
     it "should send an email to the user if found" do
       Notifier.stub!(:password_reset_instructions).and_return(nil)

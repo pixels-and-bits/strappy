@@ -18,7 +18,7 @@ h2. What does this thing have in it
 Admittedly this thing kind of steps out side of the box in what I believe they 
 intended application templates to do by bringing in controllers and specs.
   
-h3. gems
+h3. Gems
 
   * GemTools to manage gems and versions
   * SiteConfig to manage the app congiguration
@@ -57,7 +57,7 @@ h3. Plugins available through rake strappy:install
   
 h3. Authentication
 
-  * A ready to go Authlogic app, with password resets
+  * Authlogic
   
 h2. Usage
 

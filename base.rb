@@ -55,7 +55,7 @@ initializer 'gem_tools.rb', "require 'gem_tools'\nGemTools.load_gems"
 git :add => "."
 git :commit => "-a -m 'Added GemTools config'"
 
-CoreExtensions
+# CoreExtensions
 plugin 'core_extensions',
   :git => 'git@github.com:UnderpantsGnome/core_extensions.git'
 git :add => "."
@@ -157,6 +157,42 @@ plugin 'uberkit', :git => 'git://github.com/mbleigh/uberkit.git'
 git :add => "."
 git :commit => "-a -m 'Added uberkit plugin'"
 
+# Setup Authlogic
+# add gems to gems.yml
+file_append('config/gems.yml',
+  open("#{SOURCE}/config/gems.yml").read)
+run 'sudo gemtools install'
+
+# rails gets cranky when this isn't included in the config
+gem 'authlogic'
+generate 'session user_session'
+generate 'rspec_controller user_sessions'
+generate 'scaffold user login:string \
+  crypted_password:string \
+  password_salt:string \
+  persistence_token:string \
+  login_count:integer \
+  last_request_at:datetime \
+  last_login_at:datetime \
+  current_login_at:datetime \
+  last_login_ip:string \
+  current_login_ip:string'
+
+# get rid of the generated templates
+Dir.glob('app/views/users/*.erb').each do |file|
+  run "rm #{file}"
+end
+run "rm app/views/layouts/users.html.erb"
+
+generate 'controller password_reset'
+
+route "map.logout '/logout', :controller => 'user_sessions', :action => 'destroy'"
+route "map.login '/login', :controller => 'user_sessions', :action => 'new'"
+route "map.signup '/signup', :controller => 'users', :action => 'new'"
+route 'map.resource :user_session'
+route 'map.resource :account, :controller => "users"'
+route 'map.resources :password_reset'
+
 # Add ApplicationController
 file 'app/controllers/application_controller.rb',
   open("#{SOURCE}/app/controllers/application_controller.rb").read
@@ -187,42 +223,6 @@ file "spec/controllers/home_controller_spec.rb",
 
 git :add => "."
 git :commit => "-a -m 'Removed index.html. Added HomeController'"
-
-# Setup Authlogic
-# add gems to gems.yml
-file_append('config/gems.yml',
-  open("#{SOURCE}/config/gems.yml").read)
-run 'sudo gemtools install'
-
-# rails gets cranky when this isn't included in the config
-# gem 'authlogic'
-generate 'session user_session'
-generate 'rspec_controller user_sessions'
-generate 'scaffold user login:string \
-  crypted_password:string \
-  password_salt:string \
-  persistence_token:string \
-  login_count:integer \
-  last_request_at:datetime \
-  last_login_at:datetime \
-  current_login_at:datetime \
-  last_login_ip:string \
-  current_login_ip:string'
-
-# get rid of the generated templates
-Dir.glob('app/views/users/*.erb').each do |file|
-  run "rm #{file}"
-end
-run "rm app/views/layouts/users.html.erb"
-
-generate 'controller password_reset'
-
-route "map.logout '/logout', :controller => 'user_sessions', :action => 'destroy'"
-route "map.login '/login', :controller => 'user_sessions', :action => 'new'"
-route "map.signup '/signup', :controller => 'users', :action => 'new'"
-route 'map.resource :user_session'
-route 'map.resource :account, :controller => "users"'
-route 'map.resources :password_reset'
 
 # migrations
 file Dir.glob('db/migrate/*_create_users.rb').first,
@@ -257,7 +257,7 @@ end
 # testing goodies
 file_inject('/spec/spec_helper.rb',
   "require 'spec/rails'",
-  "require 'test_case'\n",
+  "require 'authlogic/test_case'\n",
   :after
 )
 
@@ -266,7 +266,6 @@ run 'mkdir -p spec/fixtures'
 
 %w(
   fixtures/users.yml
-  controllers/application_controller_spec.rb
   controllers/password_reset_controller_spec.rb
   controllers/user_sessions_controller_spec.rb
   controllers/users_controller_spec.rb
