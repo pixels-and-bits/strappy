@@ -42,13 +42,13 @@ run 'echo N\n | haml --rails .'
 run 'mkdir -p public/stylesheets/sass'
 %w( main reset ).each do |file|
   file "public/stylesheets/sass/#{file}.sass",
-    open("#{SOURCE}/common/public/stylesheets/sass/#{file}.sass").read
+    open("#{SOURCE}/public/stylesheets/sass/#{file}.sass").read
 end
 git :add => "."
 git :commit => "-a -m 'Added Haml and Sass stylesheets'"
 
 # GemTools
-file 'config/gems.yml', open("#{SOURCE}/common/config/gems.yml").read
+file 'config/gems.yml', open("#{SOURCE}/config/gems.yml").read
 run 'sudo gem install gem_tools --no-rdoc --no-ri'
 run 'sudo gemtools install'
 initializer 'gem_tools.rb', "require 'gem_tools'\nGemTools.load_gems"
@@ -62,28 +62,28 @@ git :add => "."
 git :commit => "-a -m 'Added Core Extensions'"
 
 # install strappy rake tasks
-rakefile 'strappy.rake', open("#{SOURCE}/common/lib/tasks/strappy.rake").read
+rakefile 'strappy.rake', open("#{SOURCE}/lib/tasks/strappy.rake").read
 
 # RSpec
 generate 'rspec'
-file 'spec/rcov.opts', open("#{SOURCE}/common/spec/rcov.opts").read
+file 'spec/rcov.opts', open("#{SOURCE}/spec/rcov.opts").read
 git :add => "."
 git :commit => "-a -m 'Added RSpec'"
 
 # SiteConfig
-file 'config/site.yml', open("#{SOURCE}/common/config/site.yml").read
-lib 'site_config.rb', open("#{SOURCE}/common/lib/site_config.rb").read
+file 'config/site.yml', open("#{SOURCE}/config/site.yml").read
+lib 'site_config.rb', open("#{SOURCE}/lib/site_config.rb").read
 git :add => "."
 git :commit => "-a -m 'Added SiteConfig'"
 
 # CC.rb
-rakefile('cruise.rake') { open("#{SOURCE}/common/lib/tasks/cruise.rake").read }
+rakefile('cruise.rake') { open("#{SOURCE}/lib/tasks/cruise.rake").read }
 git :add => "."
 git :commit => "-a -m 'Added cruise rake task'"
 
 # Capistrano
 capify!
-file 'config/deploy.rb', open("#{SOURCE}/common/config/deploy.rb").read
+file 'config/deploy.rb', open("#{SOURCE}/config/deploy.rb").read
 
 %w( production staging ).each do |env|
   file "config/deploy/#{env}.rb", "set :rails_env, \"#{env}\""
@@ -151,21 +151,27 @@ file 'public/blackbird/blackbird.png',
 git :add => "."
 git :commit => "-a -m 'Added Blackbird'"
 
+# uberkit
+plugin 'uberkit', :git => 'git://github.com/mbleigh/uberkit.git'
+
+git :add => "."
+git :commit => "-a -m 'Added uberkit plugin'"
+
 # Add ApplicationController
 file 'app/controllers/application_controller.rb',
-  open("#{SOURCE}/common/app/controllers/application_controller.rb").read
+  open("#{SOURCE}/app/controllers/application_controller.rb").read
 git :add => "."
 git :commit => "-a -m 'Added ApplicationController'"
 
 # Add ApplicationHelper
 file 'app/helpers/application_helper.rb',
-  open("#{SOURCE}/common/app/helpers/application_helper.rb").read
+  open("#{SOURCE}/app/helpers/application_helper.rb").read
 git :add => "."
 git :commit => "-a -m 'Added ApplicationHelper'"
 
 # Add Layout
 file 'app/views/layouts/application.html.haml',
-  open("#{SOURCE}/common/app/views/layouts/application.html.haml").read
+  open("#{SOURCE}/app/views/layouts/application.html.haml").read
 git :add => "."
 git :commit => "-a -m 'Added Layout'"
 
@@ -175,9 +181,9 @@ generate :rspec_controller, 'home'
 route "map.root :controller => 'home'"
 file 'app/views/home/index.html.haml', '%h1 Welcome'
 file "spec/views/home/index.html.haml_spec.rb",
-  open("#{SOURCE}/common/spec/views/home/index.html.haml_spec.rb").read
+  open("#{SOURCE}/spec/views/home/index.html.haml_spec.rb").read
 file "spec/controllers/home_controller_spec.rb",
-  open("#{SOURCE}/common/spec/controllers/home_controller_spec.rb").read
+  open("#{SOURCE}/spec/controllers/home_controller_spec.rb").read
 
 git :add => "."
 git :commit => "-a -m 'Removed index.html. Added HomeController'"

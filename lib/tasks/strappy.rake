@@ -1,21 +1,22 @@
 namespace :strappy do
   PLUGIN_LIST = {
-    :acts_as_taggable_on_steroids => 'http://svn.viney.net.nz/things/rails/plugins/acts_as_taggable_on_steroids',
-    :attachment_fu => 'git://github.com/technoweenie/attachment_fu.git',
-    :bundle_fu => 'git://github.com/timcharper/bundle-fu.git',
-    :fudge_form => 'git://github.com/JimNeath/fudge_form.git',
-    :open_id_authentication => 'git://github.com/rails/open_id_authentication.git',
-    :paperclip => 'git://github.com/thoughtbot/paperclip.git',
-    :salty_slugs => 'git://github.com/norbauer/salty_slugs.git',
-    :shoulda => 'git://github.com/thoughtbot/shoulda.git',
-    :spawn => 'git://github.com/tra/spawn.git',
-    :workling => 'git://github.com/purzelrakete/workling.git',
     :acts_as_configurable => 'git://github.com/omghax/acts_as_configurable.git',
+    :acts_as_list => 'git://github.com/rails/acts_as_list.git',
     :acts_as_rated => 'svn://rubyforge.org/var/svn/acts-as-rated/trunk/acts_as_rated',
-    :core_extensions => 'git@github.com:UnderpantsGnome/core_extensions.git',
     :acts_as_solr => 'git://github.com/railsfreaks/acts_as_solr.git',
+    :acts_as_taggable_on_steroids => 'http://svn.viney.net.nz/things/rails/plugins/acts_as_taggable_on_steroids',
+    :acts_as_textiled => 'git://github.com/defunkt/acts_as_textiled.git',
+    :acts_as_tree => 'git://github.com/rails/acts_as_tree.git',
+    :bundle_fu => 'git://github.com/timcharper/bundle-fu.git',
+    :core_extensions => 'git@github.com:UnderpantsGnome/core_extensions.git',
+    :open_id_authentication => 'git://github.com/rails/open_id_authentication.git',
+    :shoulda => 'git://github.com/thoughtbot/shoulda.git',
     :solr_pagination => 'git://github.com/dfl/solr_pagination.git',
-    :vasco => 'git://github.com/relevance/vasco.git'
+    :spawn => 'git://github.com/tra/spawn.git',
+    :textile_editor_helper => 'git://github.com/felttippin/textile-editor-helper.git',
+    :upload_column => 'git://github.com/jnicklas/uploadcolumn.git',
+    :workling => 'git://github.com/purzelrakete/workling.git',
+    :yarpie => 'git://github.com/tchandy/yaripe.git'
   }
 
   desc 'List all plugins available to quick install'

@@ -1,4 +1,4 @@
-h1. Strappy - Choosy
+h1. Strappy
 
 Bootstrap a Rails 2.3 app with a template
 
@@ -8,12 +8,12 @@ h2. What does this thing have in it
   * Haml views
   * Sass stylesheets
   * jQuery 1.3
-  * jQueryUI 1.5
+  * jQueryUI 1.7
   * Blackbird for UI debugging
   * CC.rb rake task
   * Capistrano with Staging and Production environments
   * A defualt 'home' controller in place of index.html
-  * A strappy rake task to install commonly used plugins (lifted from Bort)
+  * A strappy rake task to install commonly used plugins, lifted from Bort and modified
 
 Admittedly this thing kind of steps out side of the box in what I believe they 
 intended application templates to do by bringing in controllers and specs.
@@ -26,24 +26,38 @@ h3. gems
   * Rcov to help make sure you are testing
   * WillPaginate for pagination
   * ExposeModel to tidy up your controllers and views
+  * FriendlyID for pretty URLs
   
-h3. plugins
+h3. Installed plugins
 
   * jRails to handle jQuery
+  * CoreExtensions, just a bunch of common hacks I find myself using
+  * uberkit to make forms less painful
+  
+h3. Plugins available through rake strappy:install
+  * acts_as_configurable
+  * acts_as_list
+  * acts_as_rated
+  * acts_as_solr
+  * acts_as_taggable_on_steroids
+  * acts_as_textiled
+  * acts_as_tree
+  * bundle_fu
+  * core_extensions
+  * open_id_authentication
+  * shoulda
+  * solr_pagination
+  * spawn
+  * textile_editor_helper
+  * upload_column
+  * workling
+  * yarpie
+
   
 h3. Authentication
 
-Choose your option from:
-
   * A ready to go Authlogic app, with password resets
-  * A ready to go Clearance app
-  * A ready to go restful_authentication app
-  * Or none of the above
   
-If you choose Clearance you will be given the option to choose a different 
-hashing algorithm. The options are SHA512 or BCrypt (requires a gem), the 
-default is SHA1
-
 h2. Usage
 
-  rails -m http://github.com/pixels-and-bits/strappy/raw/master/base.rb app_name
+  rails -m http://github.com/pixels-and-bits/strappy/raw/golden/base.rb app_name
