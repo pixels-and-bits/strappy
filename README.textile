@@ -35,6 +35,7 @@ h3. Installed plugins
   * uberkit to make forms less painful
   
 h3. Plugins available through rake strappy:install
+
   * acts_as_configurable
   * acts_as_list
   * acts_as_rated
