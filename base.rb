@@ -55,11 +55,11 @@ initializer 'gem_tools.rb', "require 'gem_tools'\nGemTools.load_gems"
 git :add => "."
 git :commit => "-a -m 'Added GemTools config'"
 
-# CoreExtensions
-# plugin 'core_extensions',
-#   :git => 'git@github.com:UnderpantsGnome/core_extensions.git'
-# git :add => "."
-# git :commit => "-a -m 'Added Core Extensions'"
+CoreExtensions
+plugin 'core_extensions',
+  :git => 'git@github.com:UnderpantsGnome/core_extensions.git'
+git :add => "."
+git :commit => "-a -m 'Added Core Extensions'"
 
 # install strappy rake tasks
 rakefile 'strappy.rake', open("#{SOURCE}/common/lib/tasks/strappy.rake").read
@@ -129,19 +129,12 @@ end
 
 file 'public/javascripts/jquery.js',
   open('http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js').read
-file 'public/javascripts/jquery.full.js',
-  open('http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.js').read
 file 'public/javascripts/jquery-ui.js',
-  open('http://ajax.googleapis.com/ajax/libs/jqueryui/1.5/jquery-ui.min.js').read
-file 'public/javascripts/jquery-ui.full.js',
-  open('http://ajax.googleapis.com/ajax/libs/jqueryui/1.5/jquery-ui.js').read
+  open('http://ajax.googleapis.com/ajax/libs/jqueryui/1.7/jquery-ui.min.js').read
 file 'public/javascripts/jquery.form.js',
-  open('http://jqueryjs.googlecode.com/svn/trunk/plugins/form/jquery.form.js').read
+  open('http://github.com/malsup/form/raw/master/jquery.form.js').read
 
-file "public/javascripts/application.js", <<-JS
-$(function() {
-});
-JS
+file "public/javascripts/application.js", '$(function() {});'
 
 git :add => "."
 git :commit => "-a -m 'Added jQuery with UI and form plugin'"
@@ -189,36 +182,108 @@ file "spec/controllers/home_controller_spec.rb",
 git :add => "."
 git :commit => "-a -m 'Removed index.html. Added HomeController'"
 
-# Setup Authentication
-templ = case ask(<<-EOQ
+# Setup Authlogic
+# add gems to gems.yml
+file_append('config/gems.yml',
+  open("#{SOURCE}/authlogic/config/gems.yml").read)
+run 'sudo gemtools install'
 
-Choose an Authentication method:
-  1) Authlogic
-  2) Clearance
-  3) restful_authentication
-  4) None of the above
-EOQ
-).to_s
-  when '1'
-    "#{SOURCE}/authlogic/base.rb"
-  when '2'
-    "#{SOURCE}/clearance/base.rb"
-  when '3'
-    "#{SOURCE}/restful_authentication/base.rb"
-  else
-    nil
+# rails gets cranky when this isn't included in the config
+# gem 'authlogic'
+generate 'session user_session'
+generate 'rspec_controller user_sessions'
+generate 'scaffold user login:string \
+  crypted_password:string \
+  password_salt:string \
+  persistence_token:string \
+  login_count:integer \
+  last_request_at:datetime \
+  last_login_at:datetime \
+  current_login_at:datetime \
+  last_login_ip:string \
+  current_login_ip:string'
+
+# get rid of the generated templates
+Dir.glob('app/views/users/*.erb').each do |file|
+  run "rm #{file}"
+end
+run "rm app/views/layouts/users.html.erb"
+
+generate 'controller password_reset'
+
+route "map.logout '/logout', :controller => 'user_sessions', :action => 'destroy'"
+route "map.login '/login', :controller => 'user_sessions', :action => 'new'"
+route "map.signup '/signup', :controller => 'users', :action => 'new'"
+route 'map.resource :user_session'
+route 'map.resource :account, :controller => "users"'
+route 'map.resources :password_reset'
+
+# migrations
+file Dir.glob('db/migrate/*_create_users.rb').first,
+  open("#{SOURCE}/authlogic/db/migrate/create_users.rb").read
+
+# models
+%w( user notifier ).each do |name|
+  file "app/models/#{name}.rb",
+    open("#{SOURCE}/authlogic/app/models/#{name}.rb").read
 end
 
-if templ.nil?
-
-else
-  load_template(templ)
+# controllers
+%w( user_sessions password_reset users ).each do |name|
+  file "app/controllers/#{name}_controller.rb",
+    open("#{SOURCE}/authlogic/app/controllers/#{name}_controller.rb").read
 end
 
-puts "\n#{'*' * 80}\n\n"
-unless @auth_message.nil?
-  puts "#{@auth_message}"
-  puts ''
+# views
+%w(
+  notifier/password_reset_instructions.erb
+  password_reset/edit.html.haml
+  password_reset/new.html.haml
+  user_sessions/new.html.haml
+  users/_form.haml
+  users/edit.html.haml
+  users/new.html.haml
+  users/show.html.haml
+).each do |name|
+  file "app/views/#{name}", open("#{SOURCE}/authlogic/app/views/#{name}").read
 end
+
+# testing goodies
+file_inject('/spec/spec_helper.rb',
+  "require 'spec/rails'",
+  "require 'authlogic/test_case'\n",
+  :after
+)
+
+# specs
+run 'mkdir -p spec/fixtures'
+
+%w(
+  fixtures/users.yml
+  controllers/application_controller_spec.rb
+  controllers/password_reset_controller_spec.rb
+  controllers/user_sessions_controller_spec.rb
+  controllers/users_controller_spec.rb
+  views/home/index.html.haml_spec.rb
+).each do |name|
+  file "spec/#{name}", open("#{SOURCE}/authlogic/spec/#{name}").read
+end
+
+rake('db:migrate')
+git :add => "."
+git :commit => "-a -m 'Added Authlogic'"
+
+# Add ApplicationController
+file 'app/controllers/application_controller.rb',
+  open("#{SOURCE}/authlogic/app/controllers/application_controller.rb").read
+git :add => "."
+git :commit => "-a -m 'Added ApplicationController'"
+
+# Application Layout
+file 'app/views/layouts/application.html.haml',
+  open("#{SOURCE}/authlogic/app/views/layouts/application.html.haml").read
+git :add => "."
+git :commit => "-a -m 'Added Layout'"
+
 puts "All done. Enjoy."
 puts "\n#{'*' * 80}\n\n"

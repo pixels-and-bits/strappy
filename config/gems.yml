@@ -19,7 +19,7 @@ gems:
     version: '2.3.2'
 
   - name: 'config_reader'
-    version: '0.0.5'
+    version: '0.0.6'
     load: true
 
   - name: 'rspec'
@@ -39,7 +39,8 @@ gems:
     version: '1.2.1'
 
   - name: 'RedCloth'
-    version: '4.1.1'
+    version: '4.1.9
+    '
     load: true
 
   - name: 'mislav-will_paginate'
@@ -51,3 +52,7 @@ gems:
   - name: 'expose_model'
     version: '0.0.2'
     load: true
+
+  - name: 'authlogic'
+    version: '2.0.4'
+    laod: true

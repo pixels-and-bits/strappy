@@ -1,6 +1,0 @@
-
-  - name: 'rubyist-aasm'
-    require_name: 'aasm'
-    version: '2.0.2'
-    laod: true
-    source: 'http://gems.github.com'
