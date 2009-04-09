@@ -16,7 +16,7 @@ namespace :strappy do
     :textile_editor_helper => 'git://github.com/felttippin/textile-editor-helper.git',
     :upload_column => 'git://github.com/jnicklas/uploadcolumn.git',
     :workling => 'git://github.com/purzelrakete/workling.git',
-    :yarpie => 'git://github.com/tchandy/yaripe.git'
+    :yaripe => 'git://github.com/tchandy/yaripe.git'
   }
 
   desc 'List all plugins available to quick install'
