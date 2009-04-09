@@ -52,7 +52,7 @@ h3. Plugins available through rake strappy:install
   * "textile_editor_helper":http://github.com/felttippin/textile-editor-helper/
   * "upload_column":http://github.com/toy/upload_column/
   * "workling":http://github.com/purzelrakete/workling/
-  * "yarpie":http://github.com/tchandy/yaripe/
+  * "yaripe":http://github.com/tchandy/yaripe/
 
 h3. Usage
 
