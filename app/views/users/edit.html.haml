@@ -1,7 +1,8 @@
-%h1 Edit My Account
-- form_for @user, :url => account_path do |f|
-  = f.error_messages
+- uberform_for @user, :url => account_path, :html => { :multipart => true } do |f|
+  %h2 Edit My Account
   = render :partial => "form", :object => f
-  = f.submit "Update"
-%br
-= link_to "My Profile", account_path
+  .buttons
+    = f.submit "Update"
+
+- content_for :on_ready do
+  PNB.formFocusFirst('new_user')

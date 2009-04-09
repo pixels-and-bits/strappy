@@ -1,16 +1,13 @@
-= form.label :login
-%br
-= form.text_field :login
-%br
-= form.label :email
-%br
-= form.text_field :email
-%br
-= form.label :password, form.object.new_record? ? nil : "Change password"
-%br
-= form.password_field :password
-%br
-= form.label :password_confirmation
-%br
-= form.password_field :password_confirmation
-%br
+- @user.password = @user.password_confirmation = nil
+%fieldset
+  = form.error_messages
+  %legend
+    Your Information
+  = form.text_field :login, :label => 'Username'
+  = form .text_field :first_name
+  = form.text_field :last_name
+  = form.select :gender, ['Female', 'Male']
+  = form.text_field :location
+  = form.text_field :email
+  = form.password_field :password
+  = form.password_field :password_confirmation

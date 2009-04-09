@@ -40,7 +40,10 @@ end
 
 run 'echo N\n | haml --rails .'
 run 'mkdir -p public/stylesheets/sass'
-%w( main reset ).each do |file|
+%w(
+  application
+  reset
+).each do |file|
   file "public/stylesheets/sass/#{file}.sass",
     open("#{SOURCE}/public/stylesheets/sass/#{file}.sass").read
 end
@@ -166,6 +169,14 @@ run 'sudo gemtools install'
 # rails gets cranky when this isn't included in the config
 gem 'authlogic'
 generate 'session user_session'
+
+# allow login by login or pass
+file_inject('/app/models/user_session.rb',
+  "class UserSession < Authlogic::Session::Base",
+  "  find_by_login_method :find_by_login_or_email",
+  :after
+)
+
 generate 'rspec_controller user_sessions'
 generate 'scaffold user login:string \
   crypted_password:string \
@@ -192,37 +203,6 @@ route "map.signup '/signup', :controller => 'users', :action => 'new'"
 route 'map.resource :user_session'
 route 'map.resource :account, :controller => "users"'
 route 'map.resources :password_reset'
-
-# Add ApplicationController
-file 'app/controllers/application_controller.rb',
-  open("#{SOURCE}/app/controllers/application_controller.rb").read
-git :add => "."
-git :commit => "-a -m 'Added ApplicationController'"
-
-# Add ApplicationHelper
-file 'app/helpers/application_helper.rb',
-  open("#{SOURCE}/app/helpers/application_helper.rb").read
-git :add => "."
-git :commit => "-a -m 'Added ApplicationHelper'"
-
-# Add Layout
-file 'app/views/layouts/application.html.haml',
-  open("#{SOURCE}/app/views/layouts/application.html.haml").read
-git :add => "."
-git :commit => "-a -m 'Added Layout'"
-
-# Remove index.html and add HomeController
-git :rm => 'public/index.html'
-generate :rspec_controller, 'home'
-route "map.root :controller => 'home'"
-file 'app/views/home/index.html.haml', '%h1 Welcome'
-file "spec/views/home/index.html.haml_spec.rb",
-  open("#{SOURCE}/spec/views/home/index.html.haml_spec.rb").read
-file "spec/controllers/home_controller_spec.rb",
-  open("#{SOURCE}/spec/controllers/home_controller_spec.rb").read
-
-git :add => "."
-git :commit => "-a -m 'Removed index.html. Added HomeController'"
 
 # migrations
 file Dir.glob('db/migrate/*_create_users.rb').first,
@@ -277,6 +257,37 @@ end
 rake('db:migrate')
 git :add => "."
 git :commit => "-a -m 'Added Authlogic'"
+
+# Add ApplicationController
+file 'app/controllers/application_controller.rb',
+  open("#{SOURCE}/app/controllers/application_controller.rb").read
+git :add => "."
+git :commit => "-a -m 'Added ApplicationController'"
+
+# Add ApplicationHelper
+file 'app/helpers/application_helper.rb',
+  open("#{SOURCE}/app/helpers/application_helper.rb").read
+git :add => "."
+git :commit => "-a -m 'Added ApplicationHelper'"
+
+# Add Layout
+file 'app/views/layouts/application.html.haml',
+  open("#{SOURCE}/app/views/layouts/application.html.haml").read
+git :add => "."
+git :commit => "-a -m 'Added Layout'"
+
+# Remove index.html and add HomeController
+git :rm => 'public/index.html'
+generate :rspec_controller, 'home'
+route "map.root :controller => 'home'"
+file 'app/views/home/index.html.haml', '%h1 Welcome'
+file "spec/views/home/index.html.haml_spec.rb",
+  open("#{SOURCE}/spec/views/home/index.html.haml_spec.rb").read
+file "spec/controllers/home_controller_spec.rb",
+  open("#{SOURCE}/spec/controllers/home_controller_spec.rb").read
+
+git :add => "."
+git :commit => "-a -m 'Removed index.html. Added HomeController'"
 
 # Add ApplicationController
 file 'app/controllers/application_controller.rb',

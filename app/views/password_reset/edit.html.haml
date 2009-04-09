@@ -1,14 +1,9 @@
-%h1 Change My Password
-- form_for @user, :url => password_reset_path, :method => :put do |f|
+- uberform_for @user, :url => password_reset_path, :method => :put do |f|
+  %h2 Change My Password
   = f.error_messages
-  = f.label :password
-  %br
   = f.password_field :password
-  %br
-  %br
-  = f.label :password_confirmation
-  %br
   = f.password_field :password_confirmation
-  %br
-  %br
-  = f.submit "Update my password and log me in"
+  = f.submit "Update"
+
+- content_for :on_ready do
+  PNB.formFocusFirst('new_user')
