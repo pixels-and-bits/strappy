@@ -13,7 +13,7 @@ gems:
   #   # any extra config that needs to be passed to gem install
   #   config: '--with-pgsql-include-dir=/usr/local/pgsql/include --with-pgsql-lib-dir=/usr/local/pgsql/lib'
   #   # require name is different than the gem name
-  #   require_name: foo-bar
+  #   require_name: 'foo-bar'
 
   - name: 'rails'
     version: '2.3.2'
