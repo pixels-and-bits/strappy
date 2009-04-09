@@ -2,9 +2,9 @@ namespace :strappy do
   PLUGIN_LIST = {
     :acts_as_configurable => 'git://github.com/omghax/acts_as_configurable.git',
     :acts_as_list => 'git://github.com/rails/acts_as_list.git',
-    :acts_as_rated => 'svn://rubyforge.org/var/svn/acts-as-rated/trunk/acts_as_rated',
+    :acts_as_rated => 'git://github.com/jasherai/acts-as-rated.git',
     :acts_as_solr => 'git://github.com/railsfreaks/acts_as_solr.git',
-    :acts_as_taggable_on_steroids => 'http://svn.viney.net.nz/things/rails/plugins/acts_as_taggable_on_steroids',
+    :acts_as_taggable_on_steroids => 'git://github.com/jviney/acts_as_taggable_on_steroids.git',
     :acts_as_textiled => 'git://github.com/defunkt/acts_as_textiled.git',
     :acts_as_tree => 'git://github.com/rails/acts_as_tree.git',
     :bundle_fu => 'git://github.com/timcharper/bundle-fu.git',
