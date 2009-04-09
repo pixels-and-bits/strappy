@@ -42,7 +42,13 @@ run 'echo N\n | haml --rails .'
 run 'mkdir -p public/stylesheets/sass'
 %w(
   application
-  reset
+  print
+  _colors
+  _common
+  _flash
+  _grid
+  _helpers
+  _reset
 ).each do |file|
   file "public/stylesheets/sass/#{file}.sass",
     open("#{SOURCE}/public/stylesheets/sass/#{file}.sass").read
@@ -301,5 +307,6 @@ file 'app/views/layouts/application.html.haml',
 git :add => "."
 git :commit => "-a -m 'Added Layout'"
 
+puts "\n#{'*' * 80}\n\n"
 puts "All done. Enjoy."
 puts "\n#{'*' * 80}\n\n"
