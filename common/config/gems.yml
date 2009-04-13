@@ -19,7 +19,7 @@ gems:
     version: '2.3.2'
 
   - name: 'config_reader'
-    version: '0.0.5'
+    version: '0.0.6'
     load: true
 
   - name: 'rspec'
