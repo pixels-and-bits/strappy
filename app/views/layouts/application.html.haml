@@ -9,7 +9,7 @@
     %meta{ :name => 'robots', :content => 'all' }
     %meta{ :name => 'resource-type', :content => 'document' }
     %meta{ :name => 'MSSmartTagsPreventParsing', :content => 'true' }
-    %title= @page_title || SiteConfig.site_name
+    %title= page_title
     = stylesheet_link_tag 'application'
     = stylesheet_link_tag 'print', :media => 'print'
     = javascript_include_tag :defaults

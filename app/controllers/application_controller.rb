@@ -3,11 +3,23 @@
 
 class ApplicationController < ActionController::Base
   helper :all
-  helper_method :current_user_session, :current_user
+
+  helper_method :current_user_session, :current_user, :page_title,
+    :set_page_title
+
   filter_parameter_logging :password, :password_confirmation
-  before_filter :blackbird_override, :activate_authlogic
+
+  before_filter :blackbird_override, :set_format, :activate_authlogic
 
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
+
+  def set_page_title(title)
+    @page_title = title
+  end
+
+  def page_title
+    @page_title ? "#{@page_title} - #{SiteConfig.site_name}" : SiteConfig.site_name
+  end
 
   protected
 
