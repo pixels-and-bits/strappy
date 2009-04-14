@@ -267,6 +267,14 @@ git :commit => "-a -m 'Added Authlogic'"
 # Add ApplicationController
 file 'app/controllers/application_controller.rb',
   open("#{SOURCE}/app/controllers/application_controller.rb").read
+
+# Add in the :xhr mime type
+file_inject('/config/initializers/mime_types.rb',
+  '# Be sure to restart your server when you modify this file.',
+  'Mime::Type.register_alias "text/html", :xhr',
+  :after
+)
+
 git :add => "."
 git :commit => "-a -m 'Added ApplicationController'"
 
