@@ -66,7 +66,7 @@ git :commit => "-a -m 'Added GemTools config'"
 
 # CoreExtensions
 plugin 'core_extensions',
-  :git => 'git@github.com:UnderpantsGnome/core_extensions.git'
+  :git => 'git://github.com/UnderpantsGnome/core_extensions.git'
 git :add => "."
 git :commit => "-a -m 'Added Core Extensions'"
 
