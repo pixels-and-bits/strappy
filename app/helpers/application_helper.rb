@@ -72,7 +72,12 @@ module ApplicationHelper
         'application'
       )
     else
-      javascript_include_tag :defaults
+      javascript_include_tag(
+        'jquery.js',
+        'jquery-ui.js',
+        'jrails',
+        'application'
+      )
     end
   end
 end
