@@ -1,38 +1,16 @@
+- content_for :header_nav do
+  - if current_user
+    %li= link_to 'my account', account_path
+    %li= link_to 'log out', logout_path
+  - else
+    %li= link_to 'sign in', login_path
+    %li= link_to 'sign up', signup_path
+
 !!! XML
 !!!
-
 %html{html_attrs}
   %head
-    %meta{ http_equiv_attrs }
-    %meta{ 'http-equiv' => 'imagetoolbar', :content => 'no' }
-    %meta{ :name => 'distribution', :content => 'all' }
-    %meta{ :name => 'robots', :content => 'all' }
-    %meta{ :name => 'resource-type', :content => 'document' }
-    %meta{ :name => 'MSSmartTagsPreventParsing', :content => 'true' }
+    = render :partial => 'layouts/common_headers'
+    = render :partial => 'layouts/on_ready'
     %title= page_title
-    = stylesheet_link_tag 'application'
-    = stylesheet_link_tag 'print', :media => 'print'
-    = javascript_include_tag :defaults
-    = yield :head
-    %script{ :type => 'text/javascript', :charset => 'utf-8' }
-      $(document).ready(function() {
-      = yield :on_ready
-      })
-    = blackbird_tags
-  %body
-    #container
-      #header
-        %h1.title
-          %a{:href => '/'}= SiteConfig.site_name
-        %ul.reg_nav
-          - if current_user
-            %li= link_to 'my account', account_path
-            %li= link_to 'log out', logout_path
-          - else
-            %li= link_to 'sign in', login_path
-            %li= link_to 'sign up', signup_path
-      #content
-        = flash_messages
-        = yield :layout
-      %br.clear
-      #footer
+  = render :partial => 'layouts/body'

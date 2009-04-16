@@ -285,18 +285,31 @@ git :add => "."
 git :commit => "-a -m 'Added ApplicationHelper'"
 
 # Add Layout
-file 'app/views/layouts/application.html.haml',
-  open("#{SOURCE}/app/views/layouts/application.html.haml").read
+%w(
+  application.html.haml
+  _body.html.haml
+  _common_headers.html.haml
+  _footer.html.haml
+  _on_ready.html.haml
+  admin.html.haml
+).each do |name|
+  file "app/views/layouts/#{name}",
+    open("#{SOURCE}/app/views/layouts/#{name}").read
+end
+
 git :add => "."
-git :commit => "-a -m 'Added Layout'"
+git :commit => "-a -m 'Added Layout and templates'"
 
 # Remove index.html and add HomeController
 git :rm => 'public/index.html'
 generate :rspec_controller, 'home'
 route "map.root :controller => 'home'"
+
 file 'app/views/home/index.html.haml', '%h1 Welcome'
+
 file "spec/views/home/index.html.haml_spec.rb",
   open("#{SOURCE}/spec/views/home/index.html.haml_spec.rb").read
+
 file "spec/controllers/home_controller_spec.rb",
   open("#{SOURCE}/spec/controllers/home_controller_spec.rb").read
 
@@ -306,12 +319,14 @@ git :commit => "-a -m 'Removed index.html. Added HomeController'"
 # Add ApplicationController
 file 'app/controllers/application_controller.rb',
   open("#{SOURCE}/app/controllers/application_controller.rb").read
+
 git :add => "."
 git :commit => "-a -m 'Added ApplicationController'"
 
 # Application Layout
 file 'app/views/layouts/application.html.haml',
   open("#{SOURCE}/app/views/layouts/application.html.haml").read
+
 git :add => "."
 git :commit => "-a -m 'Added Layout'"
 

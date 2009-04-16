@@ -62,4 +62,17 @@ module ApplicationHelper
       })
     EOC
   end
+
+  def common_javascript_includes
+    if 'production' == RAILS_ENV
+      javascript_include_tag(
+        'http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js',
+        'http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.1/jquery-ui.min.js',
+        'jrails',
+        'application'
+      )
+    else
+      javascript_include_tag :defaults
+    end
+  end
 end
