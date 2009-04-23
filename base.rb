@@ -362,9 +362,23 @@ git :commit => "-a -m 'Added Layout'"
 
 # update the readme
 run 'rm README'
-file 'README.textile', open("#{source}/README.textile")
+file 'README.textile', open("#{SOURCE}/README.textile")
 git :add => "."
 git :commit => "-a -m 'Replaced README'"
+
+# Add Action images
+%w(
+  add.png
+  arrow_up_down.png
+  delete.png
+  pencil.png
+).each do |name|
+  file "public/images/#{name}",
+    open("#{SOURCE}/public/images/#{name}").read
+end
+
+git :add => "."
+git :commit => "-a -m 'Added Action images'"
 
 puts "\n#{'*' * 80}\n\n"
 puts "All done. Enjoy."
