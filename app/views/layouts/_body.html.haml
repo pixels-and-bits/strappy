@@ -1,11 +1,11 @@
 %body 
-  .container
-    .header
+  #container
+    #header
       %h1.title
         =link_to SiteConfig.site_name, root_path
       %ul.reg_nav
         = yield :header_nav
-    .content
+    #content
       = flash_messages
       = yield :layout
-    = render :partial => 'layouts/footer'
+  = render :partial => 'layouts/footer'

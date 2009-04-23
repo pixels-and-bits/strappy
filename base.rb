@@ -185,16 +185,7 @@ file_inject('/app/models/user_session.rb',
 )
 
 generate 'rspec_controller user_sessions'
-generate 'scaffold user login:string \
-  crypted_password:string \
-  password_salt:string \
-  persistence_token:string \
-  login_count:integer \
-  last_request_at:datetime \
-  last_login_at:datetime \
-  current_login_at:datetime \
-  last_login_ip:string \
-  current_login_ip:string'
+generate 'scaffold user'
 
 # get rid of the generated templates
 Dir.glob('app/views/users/*.erb').each do |file|
@@ -261,6 +252,10 @@ run 'mkdir -p spec/fixtures'
   file "spec/#{name}", open("#{SOURCE}/spec/#{name}").read
 end
 
+route "map.forgot_password '/forgot_password',
+  :controller => 'password_reset',
+  :action => 'new'"
+
 rake('db:migrate')
 git :add => "."
 git :commit => "-a -m 'Added Authlogic'"
@@ -292,7 +287,6 @@ git :commit => "-a -m 'Added ApplicationHelper'"
   _common_headers.html.haml
   _footer.html.haml
   _on_ready.html.haml
-  admin.html.haml
 ).each do |name|
   file "app/views/layouts/#{name}",
     open("#{SOURCE}/app/views/layouts/#{name}").read
@@ -301,12 +295,41 @@ end
 git :add => "."
 git :commit => "-a -m 'Added Layout and templates'"
 
+# setup admin section
+%w(
+  app/controllers/admin
+  app/views/admin/base
+  spec/controllers/admin
+  app/helpers/admin
+).each do |dir|
+  run "mkdir -p #{dir}"
+end
+
+file "app/views/layouts/admin.html.haml",
+  open("#{SOURCE}/app/views/layouts/admin.html.haml").read
+file "app/views/admin/base/index.html.haml",
+  open("#{SOURCE}/app/views/admin/base/index.html.haml").read
+file "app/controllers/admin/base_controller.rb",
+  open("#{SOURCE}/app/controllers/admin/base_controller.rb").read
+file "spec/controllers/admin/base_controller_spec.rb",
+  open("#{SOURCE}/spec/controllers/admin/base_controller_spec.rb").read
+file "app/helpers/admin/base_helper.rb",
+  open("#{SOURCE}/app/helpers/admin/base_helper.rb").read
+
+route "map.admin '/admin', :controller => 'admin/base'"
+
+git :add => "."
+git :commit => "-a -m 'Added admin stubs'"
+
 # Remove index.html and add HomeController
 git :rm => 'public/index.html'
 generate :rspec_controller, 'home'
 route "map.root :controller => 'home'"
 
 file 'app/views/home/index.html.haml', '%h1 Welcome'
+
+file "app/helpers/home_helper.rb",
+  open("#{SOURCE}/app/helpers/home_helper.rb").read
 
 file "spec/views/home/index.html.haml_spec.rb",
   open("#{SOURCE}/spec/views/home/index.html.haml_spec.rb").read

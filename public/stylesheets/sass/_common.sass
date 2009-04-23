@@ -1,11 +1,21 @@
+*
+  :margin 0
+
+html, body
+  :height 100%
+
 #container
   +wide_with_hpad
   +centered
+  :min-height 100%
+  :height auto !important
+  :height 100%
+  :margin= "0 auto -#{!footer_height}"
 
 #header
   :background= !primary_4
   :height= !grid * 1.5
-  +vpad
+  +pad
   :margin-bottom= !grid / 2
   h1
     +left
@@ -15,10 +25,10 @@
     li
       :margin-left= !grid
 
-#footer
-  +space
-  +clear
-  :margin-top= !grid_dbl * 2
+#footer, .push
+  +wide_with_hpad
+  +centered
+  :height= !footer_height
 
 .float_right
   :float right
@@ -37,4 +47,3 @@
 
 .quarter
   :width 25%
-
