@@ -354,6 +354,12 @@ file 'app/views/layouts/application.html.haml',
 git :add => "."
 git :commit => "-a -m 'Added Layout'"
 
+# update the readme
+run 'rm README'
+file 'README.textile', open("#{source}/README.textile")
+git :add => "."
+git :commit => "-a -m 'Replaced README'"
+
 puts "\n#{'*' * 80}\n\n"
 puts "All done. Enjoy."
 puts "\n#{'*' * 80}\n\n"
