@@ -9,8 +9,4 @@
     = render :partial => 'layouts/common_headers'
     = render :partial => 'layouts/on_ready'
     = stylesheet_link_tag 'admin'
-    %script{ :type => 'text/javascript', :charset => 'utf-8' }
-      jQuery.noConflict()
-    = javascript_include_tag 'prototype'
-    = active_scaffold_includes
   = render :partial => 'layouts/body'
