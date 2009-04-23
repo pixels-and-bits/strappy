@@ -143,8 +143,8 @@ file 'public/javascripts/jquery-ui.js',
   open('http://ajax.googleapis.com/ajax/libs/jqueryui/1.7/jquery-ui.min.js').read
 file 'public/javascripts/jquery.form.js',
   open('http://github.com/malsup/form/raw/master/jquery.form.js').read
-
-file "public/javascripts/application.js", '$(function() {});'
+file 'public/javascripts/application.js',
+  open("#{SOURCE}/public/javascripts/application.js").read
 
 git :add => "."
 git :commit => "-a -m 'Added jQuery with UI and form plugin'"
