@@ -49,6 +49,7 @@ run 'mkdir -p public/stylesheets/sass'
   _grid
   _helpers
   _reset
+  _typography
 ).each do |file|
   file "public/stylesheets/sass/#{file}.sass",
     open("#{SOURCE}/public/stylesheets/sass/#{file}.sass").read
