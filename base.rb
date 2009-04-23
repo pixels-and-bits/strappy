@@ -244,6 +244,7 @@ run 'mkdir -p spec/fixtures'
 
 %w(
   fixtures/users.yml
+  helpers/application_helper_spec.rb
   controllers/password_reset_controller_spec.rb
   controllers/user_sessions_controller_spec.rb
   controllers/users_controller_spec.rb

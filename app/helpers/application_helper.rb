@@ -1,7 +1,7 @@
 module ApplicationHelper
 
-  # dirty ugly hack to get rcov to see this
-  def html_attrs(lang = 'en-US'); {:xmlns => "http://www.w3.org/1999/xhtml", 'xml:lang' => lang, :lang => lang}
+  def html_attrs(lang = 'en-US')
+    {:xmlns => "http://www.w3.org/1999/xhtml", 'xml:lang' => lang, :lang => lang}
   end
 
   def http_equiv_attrs
@@ -32,8 +32,9 @@ module ApplicationHelper
 
   def delete_img(obj, path)
     link_to_remote(image_tag('delete.png',
-      :title => "Delete this #{obj.class}",
-      :class => 'action'), {
+        :title => "Delete this #{obj.class}",
+        :class => 'action'
+      ), {
         :url => path,
         :method => :delete,
         :confirm => "This happens immediately.\nAre you sure you want to delete it?"
@@ -43,8 +44,10 @@ module ApplicationHelper
 
   def edit_img(obj, path)
     link_to(image_tag('pencil.png',
-      :title => "Edit this #{obj.class}",
-      :class => 'action'), { :url => path }
+        :title => "Edit this #{obj.class}",
+        :class => 'action'
+      ),
+      path
     ) unless obj.id.blank?
   end
 

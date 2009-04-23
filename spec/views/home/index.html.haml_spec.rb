@@ -17,4 +17,14 @@ describe "/home/index.html.haml" do
     render "/home/index.html.haml", :layout => 'application'
     response.should have_tag("link[href=?]", '/blackbird/blackbird.css')
   end
+
+  it "should use the google apis for production" do
+    RAILS_ENV = 'production'
+    UserSession.create(users(:mmoen))
+    render "/home/index.html.haml", :layout => 'application'
+    response.should have_tag("script[src=?]",
+      'http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js')
+    response.should have_tag("script[src=?]",
+      'http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.1/jquery-ui.min.js')
+  end
 end

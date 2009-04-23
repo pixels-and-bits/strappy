@@ -1,8 +1,12 @@
 class Admin::BaseController < ApplicationController
   layout 'admin'
-  before_filter :admin_required
+  before_filter :admin_required, :set_title
 
   private
+
+  def set_title
+    set_page_title('Admin')
+  end
 
   def admin_required
     unless current_user && current_user.admin?
