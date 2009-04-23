@@ -39,8 +39,7 @@ gems:
     version: '1.2.1'
 
   - name: 'RedCloth'
-    version: '4.1.9
-    '
+    version: '4.1.9'
     load: true
 
   - name: 'mislav-will_paginate'
