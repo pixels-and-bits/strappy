@@ -287,6 +287,7 @@ git :commit => "-a -m 'Added ApplicationHelper'"
   _body.html.haml
   _common_headers.html.haml
   _footer.html.haml
+  _tracker.html.haml
   _on_ready.html.haml
 ).each do |name|
   file "app/views/layouts/#{name}",

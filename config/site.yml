@@ -5,6 +5,9 @@ defaults:
   site_name: CHANGE_ME
   admin_email: admin@CHANGE_ME.com
   blackbird: true
+  # set this to automatically include the GA code in the footer, though you
+  # probably only want to set it for production
+  google_tracker_id: nil
 
 production:
   site_url: http://CHANGE_ME.com
