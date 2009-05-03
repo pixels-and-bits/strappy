@@ -168,11 +168,6 @@ git :add => "."
 git :commit => "-a -m 'Added uberkit plugin'"
 
 # Setup Authlogic
-# add gems to gems.yml
-file_append('config/gems.yml',
-  open("#{SOURCE}/config/gems.yml").read)
-run 'sudo gemtools install'
-
 # rails gets cranky when this isn't included in the config
 gem 'authlogic'
 generate 'session user_session'
