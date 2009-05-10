@@ -1,4 +1,7 @@
 %script{ :type => 'text/javascript', :charset => 'utf-8' }
+  var AUTH_TOKEN = '#{form_authenticity_token}'
   $(document).ready(function() {
+  - unless SiteConfig.google_tracker_id.blank?
+    PNB.load_gat('#{SiteConfig.google_tracker_id}')
   = yield :on_ready
   })

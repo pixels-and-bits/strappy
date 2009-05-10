@@ -7,7 +7,6 @@ namespace :strappy do
     :acts_as_taggable_on_steroids => 'git://github.com/jviney/acts_as_taggable_on_steroids.git',
     :acts_as_textiled => 'git://github.com/defunkt/acts_as_textiled.git',
     :acts_as_tree => 'git://github.com/rails/acts_as_tree.git',
-    :bundle_fu => 'git://github.com/timcharper/bundle-fu.git',
     :core_extensions => 'git@github.com:UnderpantsGnome/core_extensions.git',
     :open_id_authentication => 'git://github.com/rails/open_id_authentication.git',
     :shoulda => 'git://github.com/thoughtbot/shoulda.git',

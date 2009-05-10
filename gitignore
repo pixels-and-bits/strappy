@@ -7,3 +7,5 @@ coverage
 db/*.sqlite3
 config/database.yml
 public/stylesheets/*.css
+public/javascripts/cache
+public/stylesheets/cache

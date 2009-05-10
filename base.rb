@@ -167,6 +167,13 @@ plugin 'uberkit', :git => 'git://github.com/mbleigh/uberkit.git'
 git :add => "."
 git :commit => "-a -m 'Added uberkit plugin'"
 
+# add bundle-fu
+plugin 'bundle-fu',
+  :git => 'git://github.com/timcharper/bundle-fu.git'
+
+git :add => "."
+git :commit => "-a -m 'Added Haml and Sass stylesheets'"
+
 # Setup Authlogic
 # rails gets cranky when this isn't included in the config
 gem 'authlogic'
