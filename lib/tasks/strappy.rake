@@ -10,10 +10,10 @@ namespace :strappy do
     :core_extensions => 'git@github.com:UnderpantsGnome/core_extensions.git',
     :open_id_authentication => 'git://github.com/rails/open_id_authentication.git',
     :shoulda => 'git://github.com/thoughtbot/shoulda.git',
-    :solr_pagination => 'git://github.com/dfl/solr_pagination.git',
     :spawn => 'git://github.com/tra/spawn.git',
     :textile_editor_helper => 'git://github.com/felttippin/textile-editor-helper.git',
     :upload_column => 'git://github.com/jnicklas/uploadcolumn.git',
+    :will_paginate_acts_as_solr => 'git://github.com/jgp/will_paginate_acts_as_solr.git',
     :workling => 'git://github.com/purzelrakete/workling.git',
     :yaripe => 'git://github.com/tchandy/yaripe.git'
   }
