@@ -331,11 +331,7 @@ generate :rspec_controller, 'home'
 route "map.root :controller => 'home'"
 
 file 'app/views/home/index.html.haml',
-  '%h1
-    Welcome
-    <br />Update app/views/home/index.html.haml to change this.
-    <br />Make sure to update config/site.yml as well
-    <br />Be sure to change the admin user password it is currently admin/changeme'
+  open("#{SOURCE}/app/views/home/index.html.haml").read
 
 file "app/helpers/home_helper.rb",
   open("#{SOURCE}/app/helpers/home_helper.rb").read
