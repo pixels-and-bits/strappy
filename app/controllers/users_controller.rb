@@ -15,6 +15,7 @@ class UsersController < ApplicationController
   end
 
   def create
+    params[:user][:password_confirmation] = params[:user][:password] if params[:user]
     @user = User.new(params[:user])
     if @user.save
       flash[:notice] = "Account registered!"
