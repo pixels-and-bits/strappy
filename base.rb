@@ -371,6 +371,7 @@ git :commit => "-a -m 'Replaced README'"
   arrow_up_down.png
   delete.png
   pencil.png
+  user_edit.png
 ).each do |name|
   file "public/images/#{name}",
     open("#{SOURCE}/public/images/#{name}").read
