@@ -176,7 +176,6 @@ git :commit => "-a -m 'Added Haml and Sass stylesheets'"
 
 # Setup Authlogic
 # rails gets cranky when this isn't included in the config
-gem 'authlogic'
 generate 'session user_session'
 
 # allow login by login or pass

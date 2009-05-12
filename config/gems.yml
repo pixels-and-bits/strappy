@@ -54,7 +54,7 @@ gems:
 
   - name: 'authlogic'
     version: '2.0.9'
-    laod: true
+    load: true
 
   - name: 'norman-friendly_id'
     require_name: 'friendly_id'
