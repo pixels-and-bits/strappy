@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
 
   filter_parameter_logging :password, :password_confirmation
 
-  before_filter :blackbird_override, :set_format, :activate_authlogic
+  before_filter :blackbird_override, :activate_authlogic#, :set_format
 
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
 
@@ -68,4 +68,17 @@ class ApplicationController < ActionController::Base
     def set_format
       request.format = :xhr if request.xhr?
     end
+
+    def render(*args)
+      if request.xhr?
+        if args.blank?
+          return super :layout => false
+        else
+          args.first[:layout] = false if args.first.is_a?(Hash) &&
+            args.first[:layout].blank?
+        end
+      end
+      super
+    end
+
 end
