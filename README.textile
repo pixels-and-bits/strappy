@@ -2,6 +2,17 @@ h1. Strappy
 
 Bootstrap a Rails 2.3 app with a template
 
+h2. Notes for anybody using older versions of Strappy
+
+Branch shuffling.
+
+  master => choosy
+  golden => master
+  authlogic is untouched
+  restful_authentication is untouched
+
+It's a pretty safe bet that the only branch to continue getting attention from us is master.
+
 h2. What does this thing have in it
 
   * "Haml":http://haml.hamptoncatlin.com/docs/haml views
@@ -14,8 +25,7 @@ h2. What does this thing have in it
   * A defualt 'home' controller in place of index.html
   * A strappy rake task to install commonly used plugins, lifted from Bort and modified
 
-Admittedly this thing kind of steps out side of the box in what I believe they
-intended application templates to do by bringing in controllers and specs.
+Admittedly this thing kind of steps out side of the box in what I believe they intended application templates to do by bringing in controllers and specs.
 
 h3. Gems
 
@@ -56,9 +66,8 @@ h3. Plugins available through rake strappy:install
 
 h3. Haml rake task
 
-You can use rake haml:from:format to convert templates to Haml, where format 
-would generally be erb or rhtml
+You can use rake haml:from:format to convert templates to Haml, where format would generally be erb or rhtml
 
 h3. Usage
 
-  rails -m http://github.com/pixels-and-bits/strappy/raw/golden/base.rb app_name
+  rails -m http://github.com/pixels-and-bits/strappy/raw/master/base.rb app_name
