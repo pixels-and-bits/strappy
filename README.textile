@@ -11,7 +11,14 @@ Branch shuffling.
   authlogic is untouched
   restful_authentication is untouched
 
-It's a pretty safe bet that the only branch to continue getting attention from us is master.
+h3. What are these branches?
+
+  * master is what we use ourselves, the explanation of what it has is this doc
+  * "choosy":*\http://github.com/pixels-and-bits/strappy/tree/choosy is a template that allows you to choose your auth method from Authlogic, Clearance, restful_authentication or none
+  * "authlogic":http://github.com/pixels-and-bits/strappy/tree/authlogic generates an app with authlogic code
+  * "restful_authentication":http://github.com/pixels-and-bits/strappy/tree/restful_authentication generates an app with restful_authentication code
+
+Keep in mind that once we decided on this setup the others have not been maintained.
 
 h2. What does this thing have in it
 
@@ -30,6 +37,7 @@ Admittedly this thing kind of steps out side of the box in what I believe they i
 h3. Gems
 
   * "authlogic":http://github.com/binarylogic/authlogic/
+  * "bundle_fu":http://github.com/timcharper/bundle-fu/ for tidy includes
   * "config_reader":http://github.com/UnderpantsGnome/config_reader-gem/tree to manage the app congiguration
   * "expose_model":http://github.com/UnderpantsGnome/expose_model/ to tidy up your controllers and views
   * "friendly_id":http://github.com/norman/friendly_id/ for pretty URLs
