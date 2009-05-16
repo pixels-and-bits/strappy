@@ -37,7 +37,6 @@ Admittedly this thing kind of steps out side of the box in what I believe they i
 h3. Gems
 
   * "authlogic":http://github.com/binarylogic/authlogic/
-  * "bundle_fu":http://github.com/timcharper/bundle-fu/ for tidy includes
   * "config_reader":http://github.com/UnderpantsGnome/config_reader-gem/tree to manage the app congiguration
   * "expose_model":http://github.com/UnderpantsGnome/expose_model/ to tidy up your controllers and views
   * "friendly_id":http://github.com/norman/friendly_id/ for pretty URLs
@@ -49,6 +48,7 @@ h3. Gems
 
 h3. Installed plugins
 
+  * "bundle-fu":http://github.com/timcharper/bundle-fu/ for tidy includes
   * "jRails":http://github.com/aaronchi/jrails/ to handle jQuery
   * "core_extensions":http://github.com/UnderpantsGnome/core_extensions/tree a bunch of common hacks I find myself using
   * "uberkit":http://github.com/mbleigh/uberkit/ to make forms less painful
