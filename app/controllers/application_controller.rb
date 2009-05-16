@@ -66,8 +66,11 @@ class ApplicationController < ActionController::Base
     end
 
     def set_format
-      @template.template_format = 'html'
-      request.format = :xhr if request.xhr?
+      # Don't mess with the format is there is one set in the URL
+      if request.xhr? && ! request.url.match(/\.\w+$/)
+        @template.template_format = 'html'
+        request.format = :xhr
+      end
     end
 
     def render(*args)
