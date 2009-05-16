@@ -74,6 +74,9 @@ git :commit => "-a -m 'Added Core Extensions'"
 # install strappy rake tasks
 rakefile 'strappy.rake', open("#{SOURCE}/lib/tasks/strappy.rake").read
 
+# install haml rake tasks
+rakefile 'haml.rake', open("#{SOURCE}/lib/tasks/haml.rake").read
+
 # RSpec
 generate 'rspec'
 file 'spec/rcov.opts', open("#{SOURCE}/spec/rcov.opts").read
