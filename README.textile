@@ -46,4 +46,4 @@ default is SHA1
 
 h2. Usage
 
-  rails -m http://github.com/pixels-and-bits/strappy/raw/master/base.rb app_name
+  rails -m http://github.com/pixels-and-bits/strappy/raw/choosy/base.rb app_name
