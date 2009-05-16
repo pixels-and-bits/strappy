@@ -81,18 +81,10 @@ module ApplicationHelper
   end
 
   def local_javascript_includes
-    if 'production' == RAILS_ENV
-      javascript_include_tag(
-        'jquery.rater.js',
-        'jrails',
-        'application'
-      )
-    else
-      javascript_include_tag(
-        'jquery.rater.js',
-        'jrails',
-        'application'
-      )
-    end
+    javascript_include_tag(
+      'jquery.rater.js',
+      'jrails',
+      'application'
+    )
   end
 end
