@@ -80,6 +80,7 @@ rakefile 'haml.rake', open("#{SOURCE}/lib/tasks/haml.rake").read
 # RSpec
 generate 'rspec'
 file 'spec/rcov.opts', open("#{SOURCE}/spec/rcov.opts").read
+file_append('spec/spec_helper.rb', open("#{SOURCE}/spec/helpers.rb").read)
 git :add => "."
 git :commit => "-a -m 'Added RSpec'"
 
