@@ -1,5 +1,6 @@
 namespace :strappy do
   PLUGIN_LIST = {
+    :acts_as_category => 'git://github.com/funkensturm/acts_as_category.git',
     :acts_as_configurable => 'git://github.com/omghax/acts_as_configurable.git',
     :acts_as_list => 'git://github.com/rails/acts_as_list.git',
     :acts_as_rated => 'git://github.com/jasherai/acts-as-rated.git',

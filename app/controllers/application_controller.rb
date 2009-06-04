@@ -66,7 +66,7 @@ class ApplicationController < ActionController::Base
     end
 
     def set_format
-      # Don't mess with the format is there is one set in the URL
+      # Don't mess with the format if there is one set in the URL
       if request.xhr? && ! request.url.match(/\.\w+$/)
         @template.template_format = 'html'
         request.format = :xhr

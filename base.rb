@@ -363,7 +363,7 @@ git :commit => "-a -m 'Added Layout'"
 
 # update the readme
 run 'rm README'
-file 'README.textile', open("#{SOURCE}/README.textile")
+file 'README.textile', open("#{SOURCE}/README.textile").read
 git :add => "."
 git :commit => "-a -m 'Replaced README'"
 
