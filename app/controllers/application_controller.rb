@@ -76,7 +76,7 @@ class ApplicationController < ActionController::Base
     def render(*args)
       if request.xhr?
         if args.blank?
-          return super :layout => false
+          return super(:layout => false)
         else
           args.first[:layout] = false if args.first.is_a?(Hash) &&
             args.first[:layout].blank?
