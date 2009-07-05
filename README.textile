@@ -29,7 +29,7 @@ h2. What does this thing have in it
   * "Blackbird":http://www.gscottolson.com/blackbirdjs/ for UI debugging
   * "CC.rb":http://cruisecontrolrb.thoughtworks.com/ rake task
   * "Capistrano":http://www.capify.org/ with Staging and Production environments
-  * A defualt 'home' controller in place of index.html
+  * A default 'home' controller in place of index.html
   * A strappy rake task to install commonly used plugins, lifted from Bort and modified
 
 Admittedly this thing kind of steps out side of the box in what I believe they intended application templates to do by bringing in controllers and specs.
