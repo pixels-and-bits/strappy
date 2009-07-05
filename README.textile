@@ -14,7 +14,7 @@ Branch shuffling.
 h3. What are these branches?
 
   * master is what we use ourselves, the explanation of what it has is this doc
-  * "choosy":*\http://github.com/pixels-and-bits/strappy/tree/choosy is a template that allows you to choose your auth method from Authlogic, Clearance, restful_authentication or none
+  * "choosy":http://github.com/pixels-and-bits/strappy/tree/choosy is a template that allows you to choose your auth method from Authlogic, Clearance, restful_authentication or none
   * "authlogic":http://github.com/pixels-and-bits/strappy/tree/authlogic generates an app with authlogic code
   * "restful_authentication":http://github.com/pixels-and-bits/strappy/tree/restful_authentication generates an app with restful_authentication code
 
