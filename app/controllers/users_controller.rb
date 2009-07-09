@@ -26,6 +26,7 @@ class UsersController < ApplicationController
   end
 
   def update
+    params[:user][:password_confirmation] = params[:user][:password] if params[:user]
     @user = @current_user # makes our views "cleaner" and more consistent
     if @user.update_attributes(params[:user])
       flash[:notice] = "Account updated!"

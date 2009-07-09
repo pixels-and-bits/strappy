@@ -46,6 +46,7 @@ run 'mkdir -p public/stylesheets/sass'
   _colors
   _common
   _flash
+  _forms
   _grid
   _helpers
   _reset
