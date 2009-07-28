@@ -14,7 +14,7 @@ Branch shuffling.
 h3. What are these branches?
 
   * master is what we use ourselves, the explanation of what it has is this doc
-  * "choosy":*\http://github.com/pixels-and-bits/strappy/tree/choosy is a template that allows you to choose your auth method from Authlogic, Clearance, restful_authentication or none
+  * "choosy":http://github.com/pixels-and-bits/strappy/tree/choosy is a template that allows you to choose your auth method from Authlogic, Clearance, restful_authentication or none
   * "authlogic":http://github.com/pixels-and-bits/strappy/tree/authlogic generates an app with authlogic code
   * "restful_authentication":http://github.com/pixels-and-bits/strappy/tree/restful_authentication generates an app with restful_authentication code
 
@@ -29,7 +29,7 @@ h2. What does this thing have in it
   * "Blackbird":http://www.gscottolson.com/blackbirdjs/ for UI debugging
   * "CC.rb":http://cruisecontrolrb.thoughtworks.com/ rake task
   * "Capistrano":http://www.capify.org/ with Staging and Production environments
-  * A defualt 'home' controller in place of index.html
+  * A default 'home' controller in place of index.html
   * A strappy rake task to install commonly used plugins, lifted from Bort and modified
 
 Admittedly this thing kind of steps out side of the box in what I believe they intended application templates to do by bringing in controllers and specs.
