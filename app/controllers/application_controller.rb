@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
 
   filter_parameter_logging :password, :password_confirmation
 
-  before_filter :blackbird_override, :activate_authlogic, :set_format
+  before_filter :blackbird_override, :activate_authlogic
 
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
 
@@ -63,14 +63,6 @@ class ApplicationController < ActionController::Base
     def redirect_back_or_default(default)
       redirect_to(session[:return_to] || default)
       session[:return_to] = nil
-    end
-
-    def set_format
-      # Don't mess with the format if there is one set in the URL
-      if request.xhr? && ! request.url.match(/\.\w+$/)
-        @template.template_format = 'html'
-        request.format = :xhr
-      end
     end
 
     def render(*args)
