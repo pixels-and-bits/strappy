@@ -78,6 +78,9 @@ rakefile 'strappy.rake', open("#{SOURCE}/lib/tasks/strappy.rake").read
 # install haml rake tasks
 rakefile 'haml.rake', open("#{SOURCE}/lib/tasks/haml.rake").read
 
+# install seed_fu rake tasks
+rakefile 'seed_fu.rake', open("#{SOURCE}/lib/tasks/seed_fu.rake").read
+
 # RSpec
 generate 'rspec'
 file 'spec/rcov.opts', open("#{SOURCE}/spec/rcov.opts").read
@@ -238,6 +241,9 @@ end
   file "app/views/#{name}", open("#{SOURCE}/app/views/#{name}").read
 end
 
+# fixtures
+file "db/fixtures/users.rb", open("#{SOURCE}/db/fixtures/users.rb").read
+
 # testing goodies
 file_inject('/spec/spec_helper.rb',
   "require 'spec/rails'",
@@ -254,6 +260,7 @@ run 'mkdir -p spec/fixtures'
   controllers/password_reset_controller_spec.rb
   controllers/user_sessions_controller_spec.rb
   controllers/users_controller_spec.rb
+  models/user_spec.rb
   views/home/index.html.haml_spec.rb
 ).each do |name|
   file "spec/#{name}", open("#{SOURCE}/spec/#{name}").read
@@ -383,6 +390,8 @@ end
 
 git :add => "."
 git :commit => "-a -m 'Added Action images'"
+
+rake('db:seed')
 
 puts "\n#{'*' * 80}\n\n"
 puts "All done. Enjoy."

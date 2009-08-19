@@ -32,7 +32,7 @@ describe UsersController do
 
     it "should redirect to account on successful :create" do
       post :create, :user => { :login => 'bob', :email => 'bob@example.com',
-        :password => 'bobs_pass', :password_confirmation => 'bobs_pass' }
+        :password => 'bobs_pass' }
       response.should redirect_to(account_path)
     end
   end

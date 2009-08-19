@@ -41,7 +41,7 @@ describe UserSessionsController do
   describe "session management" do
     it "should redirect to the account page on successful login" do
       post :create, :user_session => { :login => 'mmoen', :password => 'password' }
-      response.should redirect_to(account_path)
+      response.should redirect_to(root_path)
     end
 
     it "should redirect to the login page on session deletion" do

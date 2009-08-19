@@ -22,15 +22,6 @@ class CreateUsers < ActiveRecord::Migration
     add_index :users, :last_request_at
     add_index :users, :perishable_token
     add_index :users, :email
-
-    say "adding defalt admin user"
-    user = User.new(:login => 'admin',
-      :email => 'admin@example.com',
-      :password => 'changeme',
-      :password_confirmation => 'changeme'
-    )
-    user.admin = true
-    user.save!
   end
 
   def self.down

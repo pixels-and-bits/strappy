@@ -21,23 +21,16 @@ describe PasswordResetController do
       response.should_not be_redirect
     end
 
-    it "should change password with a valid token and matching passwords" do
+    it "should change password with a valid token" do
       users(:mmoen).reset_perishable_token!
       post :update, :id => users(:mmoen).perishable_token, :user => {
-        :password => 'new_pass', :password_confirmation => 'new_pass' }
+        :password => 'new_pass' }
       response.should redirect_to(account_url)
-    end
-
-    it "should not change password with a valid token and non-matching passwords" do
-      users(:mmoen).reset_perishable_token!
-      post :update, :id => users(:mmoen).perishable_token, :user => {
-        :password => 'new_pass', :password_confirmation => 'new' }
-      response.should_not be_redirect
     end
 
     it "should not change password with an invalid token" do
       post :update, :id => 'not_a_valid_token', :user => {
-        :password => 'new_pass', :password_confirmation => 'new' }
+        :password => 'new_pass' }
       response.should redirect_to(root_url)
     end
   end
