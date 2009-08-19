@@ -1,0 +1,74 @@
+form
+  +pad
+  :background= !l_almost_white
+
+fieldset
+  li
+    :margin-bottom= !grid_half
+
+img.action
+  :vertical-align top
+
+legend
+  +hide
+
+label
+  +block
+  :width= !grid * 14
+  :margin-bottom 2px
+  :color #000
+  :font
+    :weight bold
+
+  kbd
+    :text-decoration underline
+    :font inherit
+
+input[type="text"], input[type="password"], textarea
+  :width= !grid * 14
+  :height= !grid
+  :margin-bottom= !grid_half + 2
+  :padding 4px 2px 1px 2px
+  :font
+    :size 1.3em
+  &:disabled
+    :opacity .6
+
+select
+  :font
+    :size 1.3em
+  :margin-bottom= !grid_half + 2
+  :padding 4px 2px 1px 2px
+
+textarea
+  :width= !grid * 28
+  :height= !grid * 5 + 5
+
+input[type="text"].tiny
+  :width= !grid * 3
+
+input[type="text"].small
+  :width= !grid * 6
+
+span.tiny
+  :width= !grid * 4 - 2
+
+span.small
+  :width= !grid * 7 - 3
+
+span.normal
+  :width= (!grid * 15) - 2
+
+span.tiny, span.small, span.normal
+  :color #000
+  :display block
+  :float left
+  :font
+    :weight bold
+
+button[type="submit"]
+  :width= !grid * 15 - 6
+  :height= !grid * 2
+  :margin-top= !grid
+  :font
+    :size 1.3em
