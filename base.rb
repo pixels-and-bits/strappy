@@ -24,20 +24,6 @@ run 'cp config/database.yml config/database.template.yml'
 git :add => "."
 git :commit => "-a -m 'Initial commit'"
 
-# Haml, doing this before gemtools install since we are using 2.1
-if `gem list haml | grep 2.1.0`.chomp == ''
-  unless File.exist?('tmp/haml')
-    inside('tmp') do
-      run 'rm -rf ./haml' if File.exist?('haml')
-      run 'git clone git://github.com/nex3/haml.git'
-    end
-  end
-
-  inside('tmp/haml') do
-    run 'rake install'
-  end
-end
-
 run 'echo N\n | haml --rails .'
 run 'mkdir -p public/stylesheets/sass'
 %w(
@@ -52,6 +38,7 @@ run 'mkdir -p public/stylesheets/sass'
   _reset
   _typography
 ).each do |file|
+  puts file
   file "public/stylesheets/sass/#{file}.sass",
     open("#{SOURCE}/public/stylesheets/sass/#{file}.sass").read
 end
@@ -60,8 +47,8 @@ git :commit => "-a -m 'Added Haml and Sass stylesheets'"
 
 # GemTools
 file 'config/gems.yml', open("#{SOURCE}/config/gems.yml").read
-run 'sudo gem install gem_tools --no-rdoc --no-ri'
-run 'sudo gemtools install'
+run 'gem install gem_tools --no-rdoc --no-ri'
+run 'gemtools install'
 initializer 'gem_tools.rb', "require 'gem_tools'\nGemTools.load_gems"
 git :add => "."
 git :commit => "-a -m 'Added GemTools config'"
