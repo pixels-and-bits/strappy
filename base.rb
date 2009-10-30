@@ -1,5 +1,5 @@
 # use this for local installs
-SOURCE=ENV['SOURCE'] || 'http://github.com/pixels-and-bits/strappy/raw/golden'
+SOURCE=ENV['SOURCE'] || 'http://github.com/pixels-and-bits/strappy/raw/master'
 
 def file_append(file, data)
   File.open(file, 'a') {|f| f.write(data) }
@@ -38,7 +38,6 @@ run 'mkdir -p public/stylesheets/sass'
   _reset
   _typography
 ).each do |file|
-  puts file
   file "public/stylesheets/sass/#{file}.sass",
     open("#{SOURCE}/public/stylesheets/sass/#{file}.sass").read
 end
