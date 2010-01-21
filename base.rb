@@ -67,12 +67,21 @@ rakefile 'haml.rake', open("#{SOURCE}/lib/tasks/haml.rake").read
 # install seed_fu rake tasks
 rakefile 'seed_fu.rake', open("#{SOURCE}/lib/tasks/seed_fu.rake").read
 
+# install rcov rake tasks
+rakefile 'rcov.rake', open("#{SOURCE}/lib/tasks/rcov.rake").read
+
 # RSpec
 generate 'rspec'
 file 'spec/rcov.opts', open("#{SOURCE}/spec/rcov.opts").read
 file_append('spec/spec_helper.rb', open("#{SOURCE}/spec/helpers.rb").read)
 git :add => "."
 git :commit => "-a -m 'Added RSpec'"
+
+# Cucumber
+generate 'cucumber'
+file 'features/home/home.feature', open("#{SOURCE}/features/home/home.feature").read
+git :add => "."
+git :commit => "-a -m 'Added Cucumber'"
 
 # SiteConfig
 file 'config/site.yml', open("#{SOURCE}/config/site.yml").read
@@ -132,7 +141,7 @@ inside('public/javascripts') do
 end
 
 file 'public/javascripts/jquery.js',
-  open('http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js').read
+  open('http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js').read
 file 'public/javascripts/jquery-ui.js',
   open('http://ajax.googleapis.com/ajax/libs/jqueryui/1.7/jquery-ui.min.js').read
 file 'public/javascripts/jquery.form.js',
