@@ -24,7 +24,7 @@ h2. What does this thing have in it
 
   * "Haml":http://haml.hamptoncatlin.com/docs/haml views
   * "Sass":http://haml.hamptoncatlin.com/docs/sass stylesheets
-  * "jQuery":http://jquery.com/ 1.3
+  * "jQuery":http://jquery.com/ 1.4
   * "jQueryUI":http://jqueryui.com/ 1.7
   * "Blackbird":http://www.gscottolson.com/blackbirdjs/ for UI debugging
   * "CC.rb":http://cruisecontrolrb.thoughtworks.com/ rake task
@@ -37,14 +37,17 @@ Admittedly this thing kind of steps out side of the box in what I believe they i
 h3. Gems
 
   * "authlogic":http://github.com/binarylogic/authlogic/
-  * "config_reader":http://github.com/UnderpantsGnome/config_reader-gem/tree to manage the app congiguration
+  * "Capistrano":http://capify.org/ to deploy the app
+  * "config_reader":http://github.com/UnderpantsGnome/config_reader-gem/tree to manage the app configuration
   * "expose_model":http://github.com/UnderpantsGnome/expose_model/ to tidy up your controllers and views
   * "friendly_id":http://github.com/norman/friendly_id/ for pretty URLs
   * "gem_tools":http://github.com/UnderpantsGnome/gem_tools-gem/tree to manage gems and versions
   * "haml":http://github.com/nex3/haml/
-  * "Rcov":http://github.com/spicycode/rcov/ to help make sure you are testing
+  * "Rcov":httphttp://github.com/relevance/rcov/ to help make sure you are testing
   * "RSpec":http://github.com/dchelimsky/rspec/ for testing
+  * "Cucumber":http://github.com/aslakhellesoy/cucumber-rails/ for testing
   * "will_paginate":http://github.com/mislav/will_paginate/ for pagination
+  * "seed-fu":http://github.com/mbleigh/seed-fu/ for seeding your DB
 
 h3. Installed plugins
 
