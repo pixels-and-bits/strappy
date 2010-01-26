@@ -15,6 +15,9 @@ def file_inject(file_name, sentinel, string, before_after=:after)
   end
 end
 
+# setup sudo if necessary
+sudo = ask("\nDo you need sudo to insatll gems [y/n]: ").to_s.downcase == 'y' ? 'sudo ' : ''
+
 # Git
 file '.gitignore', open("#{SOURCE}/gitignore").read
 git :init
@@ -46,8 +49,8 @@ git :commit => "-a -m 'Added Haml and Sass stylesheets'"
 
 # GemTools
 file 'config/gems.yml', open("#{SOURCE}/config/gems.yml").read
-run 'gem install gem_tools --no-rdoc --no-ri'
-run 'gemtools install'
+run "#{sudo}gem install gem_tools --no-rdoc --no-ri"
+run "#{sudo}gemtools install"
 initializer 'gem_tools.rb', "require 'gem_tools'\nGemTools.load_gems"
 git :add => "."
 git :commit => "-a -m 'Added GemTools config'"
