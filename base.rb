@@ -16,7 +16,7 @@ def file_inject(file_name, sentinel, string, before_after=:after)
 end
 
 # setup sudo if necessary
-sudo = ask("\nDo you need sudo to insatll gems [y/n]: ").to_s.downcase == 'y' ? 'sudo ' : ''
+sudo = ask("\nDo you need sudo to install gems [y/n]: ").to_s.downcase == 'y' ? 'sudo ' : ''
 
 # Git
 file '.gitignore', open("#{SOURCE}/gitignore").read
