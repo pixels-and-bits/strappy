@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user_session, :current_user, :page_title,
     :set_page_title
 
-  filter_parameter_logging :password, :password_confirmation
+  filter_parameter_logging :password
 
   before_filter :blackbird_override, :activate_authlogic
 
