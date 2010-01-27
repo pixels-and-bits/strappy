@@ -388,6 +388,11 @@ end
 git :add => "."
 git :commit => "-a -m 'Added Action images'"
 
+# cleanup generated tests
+run 'rm -rf test'
+git :add => "."
+git :commit => "-a -m 'removed generated tests'"
+
 rake('db:seed')
 
 puts "\n#{'*' * 80}\n\n"
