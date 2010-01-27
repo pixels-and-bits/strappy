@@ -51,7 +51,7 @@ git :commit => "-a -m 'Added Haml and Sass stylesheets'"
 file 'config/gems.yml', open("#{SOURCE}/config/gems.yml").read
 run "#{sudo}gem install gem_tools --no-rdoc --no-ri"
 run "#{sudo}gemtools install"
-initializer 'gem_tools.rb', "require 'gem_tools'\nGemTools.load_gems"
+initializer '00-gem_tools.rb', "require 'gem_tools'\nGemTools.load_gems"
 git :add => "."
 git :commit => "-a -m 'Added GemTools config'"
 
