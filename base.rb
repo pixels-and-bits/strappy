@@ -15,6 +15,12 @@ def file_inject(file_name, sentinel, string, before_after=:after)
   end
 end
 
+def file_str_replace(file_name, sentinel, replacement)
+  gsub_file file_name, /(#{Regexp.escape(sentinel)})/mi do |match|
+    replacement
+  end
+end
+
 # setup sudo if necessary
 sudo = ask("\nDo you need sudo to install gems [y/n]: ").to_s.downcase == 'y' ? 'sudo ' : ''
 
@@ -81,11 +87,30 @@ git :add => "."
 git :commit => "-a -m 'Added RSpec'"
 
 # Cucumber
+require 'email_spec'
 generate 'cucumber'
-file 'features/home/home.feature', open("#{SOURCE}/features/home/home.feature").read
+generate 'email_spec'
+
+file_inject('/features/step_definitions/email_steps.rb',
+  '# Commonly used email steps',
+  "require 'email_spec'\nrequire 'email_spec/cucumber'\n",
+  :before
+)
+
+file_inject('/spec/spec_helper.rb',
+  "require 'authlogic/test_case'",
+  "require 'webrat'
+
+Webrat.configure do |config|
+  config.mode = :rails
+end",
+  :after
+)
+
 git :add => "."
 git :commit => "-a -m 'Added Cucumber'"
 
+# 
 # SiteConfig
 file 'config/site.yml', open("#{SOURCE}/config/site.yml").read
 lib 'site_config.rb', open("#{SOURCE}/lib/site_config.rb").read
@@ -263,6 +288,28 @@ run 'mkdir -p spec/fixtures'
 ).each do |name|
   file "spec/#{name}", open("#{SOURCE}/spec/#{name}").read
 end
+git :add => "."
+git :commit => "-a -m 'Added specs'"
+
+# features
+%w(
+  home/home.feature
+  users/users.feature
+  step_definitions/_common_steps.rb
+  step_definitions/user_steps.rb
+  support/blueprints.rb
+  support/paths.rb
+).each do |name|
+  file "features/#{name}", open("#{SOURCE}/features/#{name}").read
+end
+
+file_str_replace('features/step_definitions/email_steps.rb', 
+  ' || "example@example.com"', 
+  ' || @user.email || @controller.current_user.email'
+)
+
+git :add => "."
+git :commit => "-a -m 'Added features'"
 
 route "map.forgot_password '/forgot_password',
   :controller => 'password_reset',
