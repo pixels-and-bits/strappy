@@ -1,5 +1,5 @@
-Then /^open$/ do
-  save_and_open_page
+Given /^this is pending$/ do
+  pending
 end
 
 Then /^debug$/ do

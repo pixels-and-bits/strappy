@@ -21,13 +21,14 @@ namespace :rcov do
     t.rcov_opts = lambda do
       IO.readlines("#{RAILS_ROOT}/spec/rcov.opts").map {|l| l.chomp.split " "}.flatten
     end
+    t.rcov_opts << "--aggregate coverage.data"
   end
 
   desc "Run both specs and features to generate aggregated coverage"
   task :all do |t|
     rm "coverage.data" if File.exist?("coverage.data")
-    Rake::Task["rcov:cucumber_run"].invoke
     Rake::Task["rcov:rspec_run"].invoke
+    Rake::Task["rcov:cucumber_run"].invoke
   end
 
   desc "Run only rspecs"

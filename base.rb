@@ -97,6 +97,11 @@ file_inject('/features/step_definitions/email_steps.rb',
   :before
 )
 
+file_str_replace('config/cucumber.yml', 
+  %q{rerun = File.file?('rerun.txt') ? IO.read('rerun.txt') : ""},
+  %q{rerun = ""}
+)
+
 file_inject('/spec/spec_helper.rb',
   "require 'authlogic/test_case'",
   "require 'webrat'
@@ -293,9 +298,12 @@ git :commit => "-a -m 'Added specs'"
 
 # features
 %w(
+  admin/admin_base.feature
+  application/application_base.feature
   home/home.feature
   users/users.feature
   step_definitions/_common_steps.rb
+  step_definitions/_custom_web_steps.rb
   step_definitions/user_steps.rb
   support/blueprints.rb
   support/paths.rb
