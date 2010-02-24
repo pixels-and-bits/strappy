@@ -21,8 +21,12 @@ def file_str_replace(file_name, sentinel, replacement)
   end
 end
 
-# setup sudo if necessary
-sudo = ask("\nDo you need sudo to install gems [y/n]: ").to_s.downcase == 'y' ? 'sudo ' : ''
+if 'true' == ENV['INTEGRITY']
+  sudo = 'y'
+else
+  # setup sudo if necessary
+  sudo = ask("\nDo you need sudo to install gems [y/n]: ").to_s.downcase == 'y' ? 'sudo ' : ''
+end
 
 # Git
 file '.gitignore', open("#{SOURCE}/gitignore").read
@@ -32,26 +36,6 @@ run 'rm -f public/images/rails.png'
 run 'cp config/database.yml config/database.template.yml'
 git :add => "."
 git :commit => "-a -m 'Initial commit'"
-
-run 'echo N\n | haml --rails .'
-run 'mkdir -p public/stylesheets/sass'
-%w(
-  application
-  print
-  _colors
-  _common
-  _flash
-  _forms
-  _grid
-  _helpers
-  _reset
-  _typography
-).each do |file|
-  file "public/stylesheets/sass/#{file}.sass",
-    open("#{SOURCE}/public/stylesheets/sass/#{file}.sass").read
-end
-git :add => "."
-git :commit => "-a -m 'Added Haml and Sass stylesheets'"
 
 # GemTools
 file 'config/gems.yml', open("#{SOURCE}/config/gems.yml").read
@@ -87,15 +71,7 @@ git :add => "."
 git :commit => "-a -m 'Added RSpec'"
 
 # Cucumber
-require 'email_spec'
 generate 'cucumber'
-generate 'email_spec'
-
-file_inject('/features/step_definitions/email_steps.rb',
-  '# Commonly used email steps',
-  "require 'email_spec'\nrequire 'email_spec/cucumber'\n",
-  :before
-)
 
 file_str_replace('config/cucumber.yml', 
   %q{rerun = File.file?('rerun.txt') ? IO.read('rerun.txt') : ""},
@@ -141,6 +117,26 @@ end
 
 git :add => "."
 git :commit => "-a -m 'Added Capistrano config'"
+
+run 'echo N\n | haml --rails .'
+run 'mkdir -p public/stylesheets/sass'
+%w(
+  application
+  print
+  _colors
+  _common
+  _flash
+  _forms
+  _grid
+  _helpers
+  _reset
+  _typography
+).each do |file|
+  file "public/stylesheets/sass/#{file}.sass",
+    open("#{SOURCE}/public/stylesheets/sass/#{file}.sass").read
+end
+git :add => "."
+git :commit => "-a -m 'Added Haml and Sass stylesheets'"
 
 # jRails
 plugin 'jrails', :svn => 'http://ennerchi.googlecode.com/svn/trunk/plugins/jrails'
@@ -310,11 +306,6 @@ git :commit => "-a -m 'Added specs'"
 ).each do |name|
   file "features/#{name}", open("#{SOURCE}/features/#{name}").read
 end
-
-file_str_replace('features/step_definitions/email_steps.rb', 
-  ' || "example@example.com"', 
-  ' || @user.email || @controller.current_user.email'
-)
 
 git :add => "."
 git :commit => "-a -m 'Added features'"
