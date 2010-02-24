@@ -113,3 +113,16 @@ end
 Then /^the user should have an email$/ do
   @mailbox = mailbox_for(@user.email)
 end
+
+Then /^I should have a "([^\"]*)" of "([^\"]*)"$/ do |atr, value|
+  @controller.current_user.send(atr.to_sym).should eql(value)
+end
+
+Then /^I should have a "([^\"]*)" of "([^\"]*)"$/ do |atr, value|
+  @controller.current_user.send(atr.to_sym).should eql(value)
+end
+
+Then /^I should have a boolean value "([^\"]*)" that is "([^\"]*)"$/ do |atr, value|
+  value = ('1' == value || 1 == value || 'true' == value)
+  @controller.current_user.send(atr.to_sym).should eql(value)
+end

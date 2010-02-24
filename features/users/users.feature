@@ -4,7 +4,7 @@ Feature: As an end user
   Scenario: I want to create a new account with valid info
     When I fill in and submit the signup form with valid info
     Then I should see "Account registered"
-      
+
   Scenario: I want to create a new account with an invalid email
     When I fill in and submit the signup form with "email" of "bad@example"
     Then I should not see "Account registered"

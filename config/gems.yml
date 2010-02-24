@@ -43,9 +43,6 @@ gems:
   - name: 'webrat'
     version: '0.7.0'
 
-  - name: 'email_spec'
-    version: '0.4.0'
-
   - name: 'machinist'
     version: '1.0.6'
 
