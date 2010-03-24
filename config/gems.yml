@@ -16,20 +16,20 @@ gems:
   #   require_name: foo-bar
 
   - name: 'rails'
-    version: '2.3.5'
+    version: '3.0.0.beta'
 
   - name: 'config_reader'
-    version: '0.0.6'
+    version: '0.0.7'
     load: true
 
   - name: 'cucumber'
-    version: '0.6.2'
+    version: '0.6.3'
 
   - name: 'cucumber-rails'
-    version: '0.2.4'
+    version: '0.3.0'
 
   - name: 'database_cleaner'
-    version: '0.4.3'
+    version: '0.5.0'
 
   - name: 'launchy'
     version: '0.3.5'
@@ -40,8 +40,8 @@ gems:
   - name: 'rspec-rails'
     version: '1.3.2'
 
-  - name: 'webrat'
-    version: '0.7.0'
+  - name: 'capybara'
+    version: '0.3.5'
 
   - name: 'machinist'
     version: '1.0.6'
@@ -50,13 +50,13 @@ gems:
     version: '0.3.1'
 
   - name: 'haml'
-    version: '2.2.17'
+    version: '2.2.21'
 
   - name: 'rcov'
-    version: '0.9.7.1'
+    version: '0.9.8'
 
   - name: 'capistrano'
-    version: '2.5.14'
+    version: '2.5.18'
 
   - name: 'capistrano-ext'
     version: '1.2.1'
@@ -70,7 +70,7 @@ gems:
     load: true
 
   - name: 'authlogic'
-    version: '2.1.3'
+    version: '2.3.3'
     load: true
 
   - name: 'friendly_id'
