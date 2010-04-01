@@ -1,10 +1,16 @@
 #############################################################
+#	Things to change in this file
+#############################################################
+# APP_NAME is the name os your app
+# DOMAIN is the domain for deployment
+
+#############################################################
 #	Application
 #############################################################
 require 'capistrano/ext/multistage'
 set :stages, %w(staging production)
 set :default_stage, "staging"
-set :application, "CHANGE_ME"
+set :application, "APP_NAME"
 
 #############################################################
 #	Settings
@@ -19,10 +25,10 @@ ssh_options[:forward_agent] = true
 
 set :user, 'deploy'
 set :use_sudo, false
-set :gateway, 'gate.CHANGE_ME.com'
-role :web, 'web.CHANGE_ME.com'
-role :app, 'app1.CHANGE_ME.com'
-role :db, 'db.CHANGE_ME.com', :primary => true
+set :gateway, 'gate.DOMAIN.com'
+role :web, 'web.DOMAIN.com'
+role :app, 'app1.DOMAIN.com'
+role :db, 'db.DOMAIN.com', :primary => true
 
 #############################################################
 #	Git
@@ -31,7 +37,7 @@ role :db, 'db.CHANGE_ME.com', :primary => true
 set :scm, :git
 set (:branch) { stage }
 set :scm_user, 'deploy'
-set :repository, "git@github.com:CHANGE_ME/#{application}.git"
+set :repository, "git@github.com:APP_NAME/#{application}.git"
 set (:deploy_to) { "/var/webapps/#{application}/website/#{stage}" }
 set :deploy_via, :remote_cache
 set :scm_verbose, true
@@ -43,6 +49,7 @@ set :scm_verbose, true
 namespace :deploy do
   desc "This to do once we get the code up"
   task :after_update_code, :roles => :app, :except => { :no_release => true } do
+    run "cp #{shared_path}/database.yml #{release_path}/config/"
     run "cd #{release_path} && sudo gemtools install"
     run "cd #{release_path} && RAILS_ENV=#{stage} ./script/runner Sass::Plugin.update_stylesheets"
     run "cd #{release_path} && RAILS_ENV=#{stage} rake db:migrate"
