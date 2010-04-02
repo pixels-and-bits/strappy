@@ -1,11 +1,17 @@
 # use this for local installs
 SOURCE=ENV['SOURCE'] || 'http://github.com/pixels-and-bits/strappy/raw/master'
 
+def gen(what)
+  run "./script/rails g #{what}"
+end
+
 def file_append(file, data)
+  log :append, file
   File.open(file, 'a') {|f| f.write(data) }
 end
 
 def file_inject(file_name, sentinel, string, before_after=:after)
+  log :inject, file_name
   gsub_file file_name, /(#{Regexp.escape(sentinel)})/mi do |match|
     if :after == before_after
       "#{match}\n#{string}"
@@ -16,6 +22,7 @@ def file_inject(file_name, sentinel, string, before_after=:after)
 end
 
 def file_str_replace(file_name, sentinel, replacement)
+  log :gsub, file_name
   gsub_file file_name, /(#{Regexp.escape(sentinel)})/mi do |match|
     replacement
   end
@@ -23,92 +30,125 @@ end
 
 if 'true' == ENV['INTEGRITY']
   sudo = 'y'
-else
-  # setup sudo if necessary
-  sudo = ask("\nDo you need sudo to install gems [y/n]: ").to_s.downcase == 'y' ? 'sudo ' : ''
 end
 
 # Git
-file '.gitignore', open("#{SOURCE}/gitignore").read
+file_append '.gitignore', open("#{SOURCE}/gitignore").read
 git :init
 git :add => '.gitignore'
 run 'rm -f public/images/rails.png'
 run 'cp config/database.yml config/database.template.yml'
 git :add => "."
-git :commit => "-a -m 'Initial commit'"
+git :commit => "-am 'Initial commit'"
 
-# GemTools
-file 'config/gems.yml', open("#{SOURCE}/config/gems.yml").read
-run "#{sudo}gem install gem_tools --no-rdoc --no-ri"
-run "#{sudo}gemtools install"
-initializer '00-gem_tools.rb', "require 'gem_tools'\nGemTools.load_gems"
+# install Gemfile and gems
+run 'rm Gemfile'
+
+file 'Gemfile', <<-EOGEMS
+source 'http://rubygems.org'
+source 'http://gems.github.com'
+
+gem 'rails', '3.0.0.beta2'
+gem 'authlogic', :git => 'git://github.com/binarylogic/authlogic.git'
+gem 'capistrano', '2.5.18'
+gem 'capistrano-ext', '1.2.1'
+gem 'config_reader', '0.0.7'
+gem 'friendly_id', '2.2.7'
+gem 'formtastic', :git => 'git://github.com/justinfrench/formtastic.git'
+gem 'haml', '2.2.21'
+gem 'hoe', '2.5.0'
+gem 'mongrel'
+gem 'mysql'
+gem 'seed-fu', '1.2.3'
+gem 'test-unit', '1.2.3'
+gem 'will_paginate', '2.3.12'
+
+group :test do
+  gem 'webrat'
+  gem 'cucumber'
+  gem 'cucumber-rails'
+  gem 'database_cleaner'
+  gem 'faker'
+  gem 'launchy'
+  gem 'machinist'
+  gem 'pickle'
+  gem 'rcov'
+  gem 'rspec-rails', '>= 2.0.0.beta.1'
+end
+EOGEMS
+
+run 'bundle install'
 git :add => "."
-git :commit => "-a -m 'Added GemTools config'"
+git :commit => "-am 'Add Gemfile, install gems'"
 
 # CoreExtensions
 plugin 'core_extensions',
   :git => 'git://github.com/UnderpantsGnome/core_extensions.git'
 git :add => "."
-git :commit => "-a -m 'Added Core Extensions'"
+git :commit => "-am 'Added Core Extensions'"
 
 # install strappy rake tasks
 rakefile 'strappy.rake', open("#{SOURCE}/lib/tasks/strappy.rake").read
 
-# install haml rake tasks
-rakefile 'haml.rake', open("#{SOURCE}/lib/tasks/haml.rake").read
-
-# install seed_fu rake tasks
-rakefile 'seed_fu.rake', open("#{SOURCE}/lib/tasks/seed_fu.rake").read
-
-# install rcov rake tasks
-rakefile 'rcov.rake', open("#{SOURCE}/lib/tasks/rcov.rake").read
+# # install haml rake tasks
+# rakefile 'haml.rake', open("#{SOURCE}/lib/tasks/haml.rake").read
+# 
+# # install seed_fu rake tasks
+# rakefile 'seed_fu.rake', open("#{SOURCE}/lib/tasks/seed_fu.rake").read
+# 
+# # install rcov rake tasks
+# rakefile 'rcov.rake', open("#{SOURCE}/lib/tasks/rcov.rake").read
 
 # RSpec
-generate 'rspec'
-file 'spec/rcov.opts', open("#{SOURCE}/spec/rcov.opts").read
+gen 'rspec:install'
+# file 'spec/rcov.opts', open("#{SOURCE}/spec/rcov.opts").read
 file_append('spec/spec_helper.rb', open("#{SOURCE}/spec/helpers.rb").read)
 git :add => "."
-git :commit => "-a -m 'Added RSpec'"
+git :commit => "-am 'Added RSpec'"
 
 # Cucumber
-generate 'cucumber'
+gen 'cucumber:skeleton --rspec --webrat'
 
 file_str_replace('config/cucumber.yml', 
   %q{rerun = File.file?('rerun.txt') ? IO.read('rerun.txt') : ""},
   %q{rerun = ""}
 )
 
-file_inject('/spec/spec_helper.rb',
-  "require 'authlogic/test_case'",
-  "require 'webrat'
-
-Webrat.configure do |config|
-  config.mode = :rails
-end",
-  :after
-)
+# file_inject('/spec/spec_helper.rb',
+#   "require 'authlogic/test_case'",
+#   "require 'webrat'
+# 
+# Webrat.configure do |config|
+#   config.mode = :rails
+# end",
+#   :after
+# )
 
 git :add => "."
-git :commit => "-a -m 'Added Cucumber'"
+git :commit => "-am 'Added Cucumber'"
 
 # 
 # SiteConfig
 file 'config/site.yml', open("#{SOURCE}/config/site.yml").read
 lib 'site_config.rb', open("#{SOURCE}/lib/site_config.rb").read
 git :add => "."
-git :commit => "-a -m 'Added SiteConfig'"
+git :commit => "-am 'Added SiteConfig'"
 
-# CC.rb
-rakefile('cruise.rake') { open("#{SOURCE}/lib/tasks/cruise.rake").read }
-git :add => "."
-git :commit => "-a -m 'Added cruise rake task'"
+# # CC.rb
+# rakefile('cruise.rake') { open("#{SOURCE}/lib/tasks/cruise.rake").read }
+# git :add => "."
+# git :commit => "-am 'Added cruise rake task'"
 
 # Capistrano
 capify!
 file 'config/deploy.rb', open("#{SOURCE}/config/deploy.rb").read
 
 %w( production staging ).each do |env|
-  file "config/deploy/#{env}.rb", "set :rails_env, \"#{env}\""
+  file "config/deploy/#{env}.rb", <<-EOC
+set :rails_env, "#{env}"
+set :branch, "#{env}"
+EOC
+
 end
 
 inside('config/environments') do
@@ -116,7 +156,7 @@ inside('config/environments') do
 end
 
 git :add => "."
-git :commit => "-a -m 'Added Capistrano config'"
+git :commit => "-am 'Added Capistrano config'"
 
 run 'echo N\n | haml --rails .'
 run 'mkdir -p public/stylesheets/sass'
@@ -136,7 +176,7 @@ run 'mkdir -p public/stylesheets/sass'
     open("#{SOURCE}/public/stylesheets/sass/#{file}.sass").read
 end
 git :add => "."
-git :commit => "-a -m 'Added Haml and Sass stylesheets'"
+git :commit => "-am 'Added Haml and Sass stylesheets'"
 
 # jRails
 plugin 'jrails', :svn => 'http://ennerchi.googlecode.com/svn/trunk/plugins/jrails'
@@ -152,7 +192,7 @@ inside('public/javascripts') do
 end
 
 git :add => "."
-git :commit => "-a -m 'Added jRails plugin'"
+git :commit => "-am 'Added jRails plugin'"
 
 # jQuery
 
@@ -179,7 +219,7 @@ file 'public/javascripts/application.js',
   open("#{SOURCE}/public/javascripts/application.js").read
 
 git :add => "."
-git :commit => "-a -m 'Added jQuery with UI and form plugin'"
+git :commit => "-am 'Added jQuery with UI and form plugin'"
 
 # Blackbird
 run 'mkdir -p public/blackbird'
@@ -191,24 +231,26 @@ file 'public/blackbird/blackbird.png',
   open('http://blackbirdjs.googlecode.com/svn/trunk/blackbird.png').read
 
 git :add => "."
-git :commit => "-a -m 'Added Blackbird'"
+git :commit => "-am 'Added Blackbird'"
 
 # uberkit
 plugin 'uberkit', :git => 'git://github.com/mbleigh/uberkit.git'
 
+# git :add => "."
+# git :commit => "-am 'Added uberkit plugin'"
+
 git :add => "."
-git :commit => "-a -m 'Added uberkit plugin'"
+git :commit => "-am 'Added Haml and Sass stylesheets'"
 
 # add bundle-fu
 plugin 'bundle-fu',
   :git => 'git://github.com/timcharper/bundle-fu.git'
-
 git :add => "."
-git :commit => "-a -m 'Added Haml and Sass stylesheets'"
+git :commit => "-am 'Added bundle-fu'"
 
 # Setup Authlogic
 # rails gets cranky when this isn't included in the config
-generate 'session user_session'
+gen 'session user_session'
 
 # allow login by login or pass
 file_inject('/app/models/user_session.rb',
@@ -217,23 +259,46 @@ file_inject('/app/models/user_session.rb',
   :after
 )
 
-generate 'rspec_controller user_sessions'
-generate 'scaffold user'
+gen 'rspec_controller user_sessions'
+gen 'scaffold user'
 
-# get rid of the generated templates
+# get rid of the gend templates
 Dir.glob('app/views/users/*.erb').each do |file|
   run "rm #{file}"
 end
 run "rm app/views/layouts/users.html.erb"
 
-generate 'controller password_reset'
+gen 'controller password_reset'
 
-route "map.logout '/logout', :controller => 'user_sessions', :action => 'destroy'"
-route "map.login '/login', :controller => 'user_sessions', :action => 'new'"
-route "map.signup '/signup', :controller => 'users', :action => 'new'"
-route 'map.resource :user_session'
-route 'map.resource :account, :controller => "users"'
-route 'map.resources :password_reset'
+route <<-EOROUTES
+  root :to => 'home#index'
+
+  match 'admin',
+    :as => :admin,
+    :to => 'admin/base#index'
+
+  match 'login',
+    :as => :login,
+    :to => 'user_sessions#new'
+
+  match 'logout',
+    :as => :logout,
+    :to => 'user_sessions#destroy'
+
+  match 'signup',
+    :as => :signup,
+    :to => 'users#new'
+
+  match 'forgot_password',
+    :as => :forgot_password,
+    :to => 'password_reset#new'
+
+  resource :account, :controller => "users"
+  resource :user_session
+
+  resources :password_reset
+  resources :users
+EOROUTES
 
 # migrations
 file Dir.glob('db/migrate/*_create_users.rb').first,
@@ -290,7 +355,7 @@ run 'mkdir -p spec/fixtures'
   file "spec/#{name}", open("#{SOURCE}/spec/#{name}").read
 end
 git :add => "."
-git :commit => "-a -m 'Added specs'"
+git :commit => "-am 'Added specs'"
 
 # features
 %w(
@@ -308,7 +373,7 @@ git :commit => "-a -m 'Added specs'"
 end
 
 git :add => "."
-git :commit => "-a -m 'Added features'"
+git :commit => "-am 'Added features'"
 
 route "map.forgot_password '/forgot_password',
   :controller => 'password_reset',
@@ -316,7 +381,7 @@ route "map.forgot_password '/forgot_password',
 
 rake('db:migrate')
 git :add => "."
-git :commit => "-a -m 'Added Authlogic'"
+git :commit => "-am 'Added Authlogic'"
 
 # Add ApplicationController
 file 'app/controllers/application_controller.rb',
@@ -330,13 +395,13 @@ file_inject('/config/initializers/mime_types.rb',
 )
 
 git :add => "."
-git :commit => "-a -m 'Added ApplicationController'"
+git :commit => "-am 'Added ApplicationController'"
 
 # Add ApplicationHelper
 file 'app/helpers/application_helper.rb',
   open("#{SOURCE}/app/helpers/application_helper.rb").read
 git :add => "."
-git :commit => "-a -m 'Added ApplicationHelper'"
+git :commit => "-am 'Added ApplicationHelper'"
 
 # Add Layout
 %w(
@@ -351,7 +416,7 @@ git :commit => "-a -m 'Added ApplicationHelper'"
 end
 
 git :add => "."
-git :commit => "-a -m 'Added Layout and templates'"
+git :commit => "-am 'Added Layout and templates'"
 
 # setup admin section
 %w(
@@ -377,11 +442,11 @@ file "app/helpers/admin/base_helper.rb",
 route "map.admin '/admin', :controller => 'admin/base'"
 
 git :add => "."
-git :commit => "-a -m 'Added admin stubs'"
+git :commit => "-am 'Added admin stubs'"
 
 # Remove index.html and add HomeController
 git :rm => 'public/index.html'
-generate :rspec_controller, 'home'
+gen :rspec_controller, 'home'
 route "map.root :controller => 'home'"
 
 file 'app/views/home/index.html.haml',
@@ -397,27 +462,27 @@ file "spec/controllers/home_controller_spec.rb",
   open("#{SOURCE}/spec/controllers/home_controller_spec.rb").read
 
 git :add => "."
-git :commit => "-a -m 'Removed index.html. Added HomeController'"
+git :commit => "-am 'Removed index.html. Added HomeController'"
 
 # Add ApplicationController
 file 'app/controllers/application_controller.rb',
   open("#{SOURCE}/app/controllers/application_controller.rb").read
 
 git :add => "."
-git :commit => "-a -m 'Added ApplicationController'"
+git :commit => "-am 'Added ApplicationController'"
 
 # Application Layout
 file 'app/views/layouts/application.html.haml',
   open("#{SOURCE}/app/views/layouts/application.html.haml").read
 
 git :add => "."
-git :commit => "-a -m 'Added Layout'"
+git :commit => "-am 'Added Layout'"
 
 # update the readme
 run 'rm README'
 file 'README.textile', open("#{SOURCE}/README.textile").read
 git :add => "."
-git :commit => "-a -m 'Replaced README'"
+git :commit => "-am 'Replaced README'"
 
 # Add Action images
 %w(
@@ -432,14 +497,14 @@ git :commit => "-a -m 'Replaced README'"
 end
 
 git :add => "."
-git :commit => "-a -m 'Added Action images'"
+git :commit => "-am 'Added Action images'"
 
-# cleanup generated tests
+# cleanup gend tests
 run 'rm -rf test'
 git :add => "."
-git :commit => "-a -m 'removed generated tests'"
+git :commit => "-am 'removed gend tests'"
 
-rake('db:seed')
+rake 'db:seed'
 
 puts "\n#{'*' * 80}\n\n"
 puts "All done. Enjoy."

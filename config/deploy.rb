@@ -35,7 +35,6 @@ role :db, 'db.DOMAIN.com', :primary => true
 #############################################################
 
 set :scm, :git
-set (:branch) { stage }
 set :scm_user, 'deploy'
 set :repository, "git@github.com:APP_NAME/#{application}.git"
 set (:deploy_to) { "/var/webapps/#{application}/website/#{stage}" }
