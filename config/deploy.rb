@@ -41,15 +41,21 @@ set (:deploy_to) { "/var/webapps/#{application}/website/#{stage}" }
 set :deploy_via, :remote_cache
 set :scm_verbose, true
 
+
+#############################################################
+#	hooks
+#############################################################
+after 'deploy:update_code', 'deploy:prep_env'
+
 #############################################################
 #	recipes
 #############################################################
 
 namespace :deploy do
   desc "This to do once we get the code up"
-  task :after_update_code, :roles => :app, :except => { :no_release => true } do
+  task :prep_env, :roles => :app, :except => { :no_release => true } do
     run "cp #{shared_path}/database.yml #{release_path}/config/"
-    run "cd #{release_path} && sudo gemtools install"
+    run "cd #{release_path} && bundle install"
     run "cd #{release_path} && RAILS_ENV=#{stage} ./script/runner Sass::Plugin.update_stylesheets"
     run "cd #{release_path} && RAILS_ENV=#{stage} rake db:migrate"
   end

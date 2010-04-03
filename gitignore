@@ -1,12 +1,9 @@
-log/*.log
-tmp/**/*
 .DS_Store
 doc/api
 doc/app
 coverage
 coverage.data
 rerun.txt
-db/*.sqlite3
 config/database.yml
 public/stylesheets/*.css
 public/javascripts/cache
