@@ -7,8 +7,6 @@ class ApplicationController < ActionController::Base
   helper_method :current_user_session, :current_user, :page_title,
     :set_page_title
 
-  filter_parameter_logging :password
-
   before_filter :blackbird_override, :activate_authlogic
 
   protect_from_forgery # See ActionController::RequestForgeryProtection for details

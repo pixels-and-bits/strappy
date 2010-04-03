@@ -1,5 +1,5 @@
 # RSpec
-gen 'rspec:install'
+generate 'rspec:install'
 # file 'spec/rcov.opts', open("#{ENV['SOURCE']}/spec/rcov.opts").read
 file_append('spec/spec_helper.rb', open("#{ENV['SOURCE']}/spec/helpers.rb").read)
 
@@ -17,7 +17,7 @@ run 'mkdir -p spec/fixtures'
 end
 
 # cleanup any generated tests since we are using RSpec
-run 'rm -rf test'
+rm_rf 'test'
 
 git :add => "."
 git :commit => "-am 'Added RSpec'"

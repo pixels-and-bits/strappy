@@ -1,5 +1,11 @@
+%w( migrate fixtures ).each do |d|
+  run "mkdir -p db/#{d}"
+end
+
 # migrations
-file Dir.glob('db/migrate/*_create_users.rb').first,
+file_name = Dir.glob('db/migrate/*_create_users.rb').first
+rm file_name
+file file_name,
   open("#{ENV['SOURCE']}/db/migrate/create_users.rb").read
 
 # fixtures

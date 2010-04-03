@@ -2,7 +2,8 @@ source 'http://rubygems.org'
 source 'http://gems.github.com'
 
 gem 'rails', '3.0.0.beta2'
-gem 'authlogic', :git => 'git://github.com/binarylogic/authlogic.git'
+# gem 'authlogic', :git => 'git://github.com/binarylogic/authlogic.git'
+gem 'authlogic', :git => "git://github.com/odorcicd/authlogic.git", :branch => "rails3"
 gem 'capistrano', '2.5.18'
 gem 'capistrano-ext', '1.2.1'
 gem 'config_reader', '0.0.7'
@@ -27,4 +28,5 @@ group :test do
   gem 'pickle'
   gem 'rcov'
   gem 'rspec-rails', '>= 2.0.0.beta.1'
+  gem 'sqlite3-ruby'
 end

@@ -7,7 +7,7 @@ inside('public/javascripts') do
     prototype.js
     rails.js
   ).each do |file|
-    run "rm -f #{file}"
+    rm file
   end
 end
 

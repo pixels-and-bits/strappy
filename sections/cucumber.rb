@@ -1,5 +1,5 @@
 # Cucumber
-gen "cucumber:skeleton --rspec #{WEB_DRIVER}"
+generate "cucumber:skeleton --rspec #{WEB_DRIVER}"
 
 # file_str_replace('config/cucumber.yml', 
 #   %q{rerun = File.file?('rerun.txt') ? IO.read('rerun.txt') : ""},
@@ -15,7 +15,6 @@ gen "cucumber:skeleton --rspec #{WEB_DRIVER}"
   step_definitions/_custom_web_steps.rb
   step_definitions/user_steps.rb
   support/blueprints.rb
-  support/paths.rb
 ).each do |name|
   file "features/#{name}", open("#{ENV['SOURCE']}/features/#{name}").read
 end

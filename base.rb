@@ -14,15 +14,16 @@ ENV['SOURCE'] ||= 'http://github.com/pixels-and-bits/strappy/raw/master'
   jquery
   blackbird
   bundle_fu
-  controllers
   home_page
-  models
   images
   routes
   rspec
   capybara
   cucumber
   rake_tasks
+  authlogic
+  controllers
+  models
   database
 ).each do |f|
   apply "#{ENV['SOURCE']}/sections/#{f}.rb"
