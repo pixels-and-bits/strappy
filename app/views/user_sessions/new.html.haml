@@ -1,11 +1,11 @@
-- uberform_for @user_session, :url => user_session_path do |f|
+- semantic_form_for @user_session, :url => user_session_path do |f|
   %h2 Login
-  = f.text_field :login, :label => 'Username'
-  = f.password_field :password
-  = f.check_box :remember_me, :class => 'left'
+  = f.input :login, :label => 'Username'
+  = f.input :password
+  = f.input :remember_me, :as => :boolean, :class => 'left'
   %br
   .buttons
-    = f.submit "Login"
+    = f.commit_button "Login"
   = link_to 'Forgotten Password', forgot_password_path, :class => 'forgotten_password'
 
 - content_for :on_ready do

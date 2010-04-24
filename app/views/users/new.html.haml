@@ -1,8 +1,8 @@
-- uberform_for @user, :url => account_path do |f|
+- semantic_form_for @user, :url => account_path do |f|
   %h2 Your Information
   = render :partial => "form", :object => f
   .buttons
-    = f.submit "Register"
+    = f.commit_button "Register"
 
 - content_for :on_ready do
   PNB.formFocusFirst('new_user')

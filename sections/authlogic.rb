@@ -1,7 +1,6 @@
 # Setup Authlogic
 generate 'authlogic:session user_session'
-generate 'controller user_sessions'
-generate 'model user'
+generate 'migration create_users'
 
 # # allow login by login or pass
 # file_inject('app/models/user_session.rb',
@@ -16,12 +15,8 @@ file_inject('spec/spec_helper.rb',
   :after
 )
 
-# get rid of the generated templates
-Dir.glob('app/views/users/*.erb').each do |file|
-  rm file
-end
-
-generate 'controller password_reset'
+# rm 'app/controllers/password_reset_conroller.rb'
+# generate 'controller password_reset'
 
 git :add => "."
 git :commit => "-am 'Setup Authlogic'"

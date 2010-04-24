@@ -1,8 +1,8 @@
-- uberform_for @user, :url => account_path, :html => { :multipart => true } do |f|
+- semantic_form_for @user, :url => account_path, :html => { :multipart => true } do |f|
   %h2 Edit My Account
   = render :partial => "form", :object => f
   .buttons
-    = f.submit "Update"
+    = f.commit_button "Update"
 
 - content_for :on_ready do
   PNB.formFocusFirst('new_user')

@@ -1,5 +1,5 @@
 @dir = File.dirname(__FILE__)
-
+puts @dir
 task :default do
   system 'rm -rf ./generated_app'
   system "export SOURCE=#{@dir}; rails generated_app -m #{@dir}/base.rb"

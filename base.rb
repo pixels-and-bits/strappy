@@ -4,6 +4,7 @@ ENV['SOURCE'] ||= 'http://github.com/pixels-and-bits/strappy/raw/master'
 # functions needs to be first
 %w(
   functions
+  application
   git
   gemfile
   core_extensions
@@ -24,7 +25,9 @@ ENV['SOURCE'] ||= 'http://github.com/pixels-and-bits/strappy/raw/master'
   authlogic
   controllers
   models
+  formtastic
   database
+  cleanup
 ).each do |f|
   apply "#{ENV['SOURCE']}/sections/#{f}.rb"
 end

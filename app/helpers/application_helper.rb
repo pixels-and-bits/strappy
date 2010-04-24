@@ -14,7 +14,7 @@ module ApplicationHelper
     %w(notice warning error).each do |msg|
       messages << content_tag(:div, html_escape(flash[msg.to_sym]), :id => "flash-#{msg}") unless flash[msg.to_sym].blank?
     end
-    messages
+    raw messages.join
   end
 
   def blackbird_tags
@@ -67,7 +67,7 @@ module ApplicationHelper
   end
 
   def remote_javascript_includes
-    if 'production' == RAILS_ENV
+    if Rails.env.production?
       javascript_include_tag(
         'http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js',
         'http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.1/jquery-ui.min.js'
