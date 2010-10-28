@@ -4,27 +4,22 @@ Bootstrap a Rails 3 app
 
 h2. What does this thing have in it
 
-  * "Haml":http://haml.hamptoncatlin.com/docs/haml views
-  * "Sass":http://haml.hamptoncatlin.com/docs/sass stylesheets
-  * "jQuery":http://jquery.com/ 1.4
-  * "jQueryUI":http://jqueryui.com/ 1.7
   * "Blackbird":http://www.gscottolson.com/blackbirdjs/ for UI debugging
-  * "Devise":http://github.com/plataformatec/devise rake task
   * "Capistrano":http://www.capify.org/ with Staging and Production environments
-  * A default 'home' controller in place of index.html
-  * A strappy rake task to install commonly used plugins, lifted from Bort and modified
-
-h3. Gems
-
-  * "Capistrano":http://capify.org/ to deploy the app
   * "config_reader":http://github.com/UnderpantsGnome/config_reader-gem/tree to manage the app configuration
+  * "Cucumber":http://github.com/aslakhellesoy/cucumber-rails/ for testing
+  * "Devise":http://github.com/plataformatec/devise Flexible authentication solution for Rails with Warden
   * "friendly_id":http://github.com/norman/friendly_id/ for pretty URLs
-  * "haml":http://github.com/nex3/haml/
+  * "Haml 3.0":http://haml-lang.com/ Haml takes your gross, ugly templates and replaces them with veritable Haiku
+  * "haml-rails":http://github.com/indirect/haml-rails let your Gemfile do the talking
+  * "jQuery":http://jquery.com/ 1.4
+  * "jquery-rails":http://github.com/indirect/jquery-rails A gem to automate using jQuery with Rails 3 
+  * "jQueryUI":http://jqueryui.com/ 1.7
   * "Rcov":httphttp://github.com/relevance/rcov/ to help make sure you are testing
   * "RSpec":http://github.com/dchelimsky/rspec/ for testing
-  * "Cucumber":http://github.com/aslakhellesoy/cucumber-rails/ for testing
-  * "haml-rails":http://github.com/indirect/haml-rails
-  * "jquery-rails":http://github.com/indirect/jquery-rails
+  * "Sass 3.1":http://sass-lang.com/ Sass makes CSS fun again
+  * A default 'home' controller in place of index.html
+  * A strappy rake task to install commonly used plugins, lifted from Bort and modified
 
 h3. Plugins available through rake strappy:install
 
