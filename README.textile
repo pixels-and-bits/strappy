@@ -1,6 +1,6 @@
 h1. Strappy
 
-Bootstrap a Rails 3 app
+Bootstrap a Rails 3 app - This is very much a work in progress a this point...
 
 h2. What does this thing have in it
 
@@ -42,3 +42,8 @@ You can use rake haml:from:format to convert templates to Haml, where format wou
 h3. Usage
 
   rails new app_name -m http://github.com/pixels-and-bits/strappy/raw/tha-remix/base.rb
+
+h3. TODO
+
+  finish converting the "HTML5 Boilerplate":http://html5boilerplate.com
+  I know there is already a conversion to Haml and Sass, but I don't want to have to use Compas (nothing personal)
