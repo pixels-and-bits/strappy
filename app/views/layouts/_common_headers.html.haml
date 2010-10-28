@@ -1,0 +1,9 @@
+%meta{ http_equiv_attrs }
+%meta{ 'http-equiv' => 'imagetoolbar', :content => 'no' }
+%meta{ :name => 'distribution', :content => 'all' }
+%meta{ :name => 'robots', :content => 'all' }
+%meta{ :name => 'resource-type', :content => 'document' }
+%meta{ :name => 'MSSmartTagsPreventParsing', :content => 'true' }
+= stylesheet_link_tag 'application'
+= stylesheet_link_tag 'print', :media => 'print'
+= yield :head

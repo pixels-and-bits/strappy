@@ -1,0 +1,16 @@
+- content_for :header_nav do
+  %li= link_to 'admin home', admin_path
+  %li= link_to 'site home', root_path
+
+  !!! XML
+  !!!
+  %html{html_attrs}
+    %head
+      = render :partial => 'layouts/common_headers'
+      %title= page_title
+    = render :partial => 'layouts/body'
+    = remote_javascript_includes
+    - bundle do
+      = local_javascript_includes
+      = blackbird_tags
+    = render :partial => 'layouts/on_ready'

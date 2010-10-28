@@ -1,0 +1,13 @@
+%body 
+  #container
+    #header
+      %h1.title
+        =link_to SiteConfig.site_name, root_path
+      %ul.reg_nav
+        = yield :header_nav
+    #content
+      = flash_messages
+      = yield :layout
+      %br.clear
+      .push
+  = render :partial => 'layouts/footer'

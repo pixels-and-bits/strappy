@@ -1,0 +1,16 @@
+defaults:
+  site_url: http://localhost:3000
+  host_name: CHANGE-ME.com
+  mail_from: noreply@CHANGE_ME.com
+  site_name: CHANGE-ME
+  admin_email: admin@CHANGE-ME.com
+  blackbird: true
+
+production:
+  site_url: http://CHANGE-ME.com
+  blackbird: false
+  # set this to automatically include the GA code in the footer
+  google_tracker_id:
+
+test:
+  blackbird: false

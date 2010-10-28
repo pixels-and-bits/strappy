@@ -1,0 +1,6 @@
+%script{ :type => 'text/javascript', :charset => 'utf-8' }
+  $(document).ready(function() {
+  - unless SiteConfig.google_tracker_id.blank?
+    PNB.load_gat('#{SiteConfig.google_tracker_id}')
+  = yield :on_ready
+  })

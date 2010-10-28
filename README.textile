@@ -1,0 +1,49 @@
+h1. Strappy
+
+Bootstrap a Rails 3 app
+
+h2. What does this thing have in it
+
+  * "Haml":http://haml.hamptoncatlin.com/docs/haml views
+  * "Sass":http://haml.hamptoncatlin.com/docs/sass stylesheets
+  * "jQuery":http://jquery.com/ 1.4
+  * "jQueryUI":http://jqueryui.com/ 1.7
+  * "Blackbird":http://www.gscottolson.com/blackbirdjs/ for UI debugging
+  * "Devise":http://github.com/plataformatec/devise rake task
+  * "Capistrano":http://www.capify.org/ with Staging and Production environments
+  * A default 'home' controller in place of index.html
+  * A strappy rake task to install commonly used plugins, lifted from Bort and modified
+
+h3. Gems
+
+  * "Capistrano":http://capify.org/ to deploy the app
+  * "config_reader":http://github.com/UnderpantsGnome/config_reader-gem/tree to manage the app configuration
+  * "friendly_id":http://github.com/norman/friendly_id/ for pretty URLs
+  * "haml":http://github.com/nex3/haml/
+  * "Rcov":httphttp://github.com/relevance/rcov/ to help make sure you are testing
+  * "RSpec":http://github.com/dchelimsky/rspec/ for testing
+  * "Cucumber":http://github.com/aslakhellesoy/cucumber-rails/ for testing
+  * "haml-rails":http://github.com/indirect/haml-rails
+  * "jquery-rails":http://github.com/indirect/jquery-rails
+
+h3. Plugins available through rake strappy:install
+
+  * "acts_as_configurable":http://github.com/omghax/acts_as_configurable/
+  * "acts_as_list":http://github.com/rails/acts_as_list/
+  * "acts_as_rated":http://github.com/jasherai/acts-as-rated/
+  * "acts_as_solr":http://github.com/railsfreaks/acts_as_solr/
+  * "acts_as_taggable_on_steroids":http://github.com/jviney/acts_as_taggable_on_steroids/tree
+  * "acts_as_textiled":http://github.com/defunkt/acts_as_textiled/
+  * "acts_as_tree":http://github.com/rails/acts_as_tree/
+  * "bundle_fu":http://github.com/timcharper/bundle-fu/
+  * "shoulda":http://github.com/thoughtbot/shoulda/
+  * "solr_pagination":http://github.com/dfl/solr_pagination/
+  * "textile_editor_helper":http://github.com/felttippin/textile-editor-helper/
+
+h3. Haml rake task
+
+You can use rake haml:from:format to convert templates to Haml, where format would generally be erb or rhtml
+
+h3. Usage
+
+  rails new app_name -m http://github.com/pixels-and-bits/strappy/raw/tha-remix/base.rb

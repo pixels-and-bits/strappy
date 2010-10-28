@@ -1,0 +1,10 @@
+.DS_Store
+doc/api
+doc/app
+coverage
+coverage.data
+rerun.txt
+config/database.yml
+public/stylesheets/*.css
+public/javascripts/cache
+public/stylesheets/cache

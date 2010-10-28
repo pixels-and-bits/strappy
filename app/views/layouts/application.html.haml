@@ -1,0 +1,20 @@
+- content_for :header_nav do
+  - if current_user
+    %li= link_to 'my account', account_path
+    %li= link_to 'sign out', logout_path
+  - else
+    %li= link_to 'sign in', login_path
+    %li= link_to 'sign up', signup_path
+
+!!! XML
+!!!
+%html{html_attrs}
+  %head
+    = render :partial => 'layouts/common_headers'
+    %title= page_title
+  = render :partial => 'layouts/body'
+  = remote_javascript_includes
+  - bundle do
+    = local_javascript_includes
+  = raw blackbird_tags
+  = render :partial => 'layouts/on_ready'
