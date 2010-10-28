@@ -7,6 +7,7 @@ h2. What does this thing have in it
   * "Blackbird":http://www.gscottolson.com/blackbirdjs/ for UI debugging
   * "Capistrano":http://www.capify.org/ with Staging and Production environments
   * "config_reader":http://github.com/UnderpantsGnome/config_reader-gem/tree to manage the app configuration
+  * "carrierwave":http://carrierwave.rubyforge.org/ Classier solution for file uploads in Ruby for Rack, Rails, Merb and Sinatra
   * "Cucumber":http://github.com/aslakhellesoy/cucumber-rails/ for testing
   * "Devise":http://github.com/plataformatec/devise Flexible authentication solution for Rails with Warden
   * "friendly_id":http://github.com/norman/friendly_id/ for pretty URLs
