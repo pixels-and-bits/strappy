@@ -1,4 +1,5 @@
-puts "TODO: Fix me for html5-boilerplate #{__FILE__}"
+# puts "TODO: Fix me for html5-boilerplate #{__FILE__}"
+# NOTE: not sure what's happening with this yet
 return
 
 # install haml rake tasks
