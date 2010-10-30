@@ -29,3 +29,6 @@ end
   file "public/stylesheets/sass/#{file_name}",
     open("#{ENV['SOURCE']}/public/stylesheets/sass/#{file_name}").read
 end
+
+git :add => "."
+git :commit => "-am 'Added html5-boilerplate files'"
