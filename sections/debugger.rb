@@ -1,4 +1,4 @@
-file_append 'config/environemnts/development.rb',
+file_append 'config/environments/development.rb',
 <<-EOA
 
 if defined?(PhusionPassenger)

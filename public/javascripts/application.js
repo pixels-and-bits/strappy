@@ -6,7 +6,7 @@ $(function() {
   }
 });
 
-var PNB = function() {
+var Strappy = function() {
   return {
     updateSortables: function(parent) {
       var elems = $(parent + ' ul li .position'), i = 1

@@ -17,6 +17,7 @@ ENV['SOURCE'] ||= 'http://github.com/pixels-and-bits/strappy/raw/master'
   rake_tasks
   javascripts
   debugger
+  html5-boilerplate
 ).each do |f|
   apply "#{ENV['SOURCE']}/sections/#{f}.rb"
 end
