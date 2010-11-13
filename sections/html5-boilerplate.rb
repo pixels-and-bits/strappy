@@ -1,34 +1,4 @@
-# javascripts
-%w(
-  profiling/charts.swf
-  profiling/config.js
-  profiling/yahoo-profiling.css
-  profiling/yahoo-profiling.min.js
-  dd_belatedpng.js
-  modernizr.min.js
-  plugins.js
-).each do |file_name|
-  file "public/javascripts/#{file_name}",
-    open("#{ENV['SOURCE']}/public/javascripts/#{file_name}").read
-end
-
-# public_html
-%w(
-  .htaccess
-  crossdomain.xml
-).each do |file_name|
-  file "public/#{file_name}",
-    open("#{ENV['SOURCE']}/public/#{file_name}").read
-end
-
-# Sass templates
-%w(
-  style.scss
-  handheld.scss
-).each do |file_name|
-  file "public/stylesheets/sass/#{file_name}",
-    open("#{ENV['SOURCE']}/public/stylesheets/sass/#{file_name}").read
-end
+run 'bundle exec compass init rails -r html5-boilerplate -u html5-boilerplate --force --sass-dir app/stylesheets --css-dir public/stylesheets'
 
 git :add => "."
-git :commit => "-am 'Added html5-boilerplate files'"
+git :commit => "-am 'Ran compass init with html5-boilerplate'"

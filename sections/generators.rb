@@ -5,4 +5,4 @@ generate 'jquery:install --ui --force'
 generate 'devise:install'
 
 git :add => "."
-git :commit => "-am 'Run generators for devise, machinist, rspec and cucumber'"
+git :commit => "-am 'Ran generators for compass-html5-boilerplate, devise, machinist, rspec and cucumber'"

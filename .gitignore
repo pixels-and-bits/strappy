@@ -1,1 +1,3 @@
 generated_app
+.bundle
+Gemfile.lock

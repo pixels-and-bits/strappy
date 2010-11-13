@@ -10,6 +10,7 @@ ENV['SOURCE'] ||= 'http://github.com/pixels-and-bits/strappy/raw/master'
   site_config
   generators
   capistrano
+  html5-boilerplate
   admin
   haml
   blackbird
@@ -17,12 +18,13 @@ ENV['SOURCE'] ||= 'http://github.com/pixels-and-bits/strappy/raw/master'
   rake_tasks
   javascripts
   debugger
-  html5-boilerplate
 ).each do |f|
   apply "#{ENV['SOURCE']}/sections/#{f}.rb"
 end
 
 rake 'db:migrate'
+git :add => "."
+git :commit => "-am 'commit schema'"
 
 puts "\n#{'*' * 80}\n\n"
 puts "All done. Enjoy."
