@@ -7,12 +7,12 @@ file_str_replace 'config/routes.rb',
   %Q{
   namespace :admin do
     root :to => 'base#index'
-  end # namespace : admin
+  end
   }
 
 file_str_replace 'config/routes.rb',
   'devise_for :admins',
-  'devise_for :admin'
+  "devise_for :admin, :path_names => { :sign_in => 'login', :sign_out => 'logout' }"
 
 # force auth
 file_inject 'app/controllers/admin/base_controller.rb',

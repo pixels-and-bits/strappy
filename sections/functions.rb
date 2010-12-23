@@ -22,9 +22,9 @@ def file_str_replace(file_name, sentinel, replacement)
 end
 
 def rm(f)
-  run "rm #{f} &> /dev/null"
+  FileUtils.rm(f)
 end
 
 def rm_rf(f)
-  run "rm -rf #{f} &> /dev/null"
+  FileUtils.rm_rf(f)
 end

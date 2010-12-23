@@ -7,17 +7,17 @@ ENV['SOURCE'] ||= 'http://github.com/pixels-and-bits/strappy/raw/master'
   git
   gemfile
   config
-  site_config
+  app_config
   generators
   capistrano
   html5-boilerplate
   admin
-  haml
   blackbird
   home_page
   rake_tasks
   javascripts
   debugger
+  initializers
 ).each do |f|
   apply "#{ENV['SOURCE']}/sections/#{f}.rb"
 end
