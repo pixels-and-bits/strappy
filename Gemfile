@@ -1,12 +1,12 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.3'
+gem 'rails', '3.0.7'
 gem 'devise'
 gem 'friendly_id', '3.1.8'
-gem 'haml', '>= 3.0.23'
+gem 'haml', '>= 3.1.1'
 gem 'haml-rails'
 gem 'jquery-rails'
-gem 'sass', '>= 3.1.0.alpha.206'
+gem 'sass', '>= 3.1.1'
 gem 'sqlite3-ruby', :require => 'sqlite3'
 
 group :test do
@@ -15,13 +15,13 @@ group :test do
   gem 'capybara'
   gem 'cucumber'
   gem 'cucumber-rails'
-  gem 'database_cleaner', '>= 0.6.0'
+  gem 'database_cleaner', '>= 0.6.7'
   gem 'launchy'
   gem 'machinist', '>= 2.0.0.beta2'
   gem 'pickle'
   gem 'rcov'
   gem 'redgreen'
-  gem 'rspec-rails', '2.0.1'
+  gem 'rspec-rails', '>=2.6.0.rc4'
   gem 'ruby-debug'
   gem 'wirble'
 end

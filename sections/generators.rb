@@ -1,7 +1,7 @@
 generate 'rspec:install'
 generate 'cucumber:install --rspec --capybara'
 generate 'machinist:install'
-generate 'jquery:install --ui --force --version 1.4.4'
+generate 'jquery:install --ui --force --version 1.5.2'
 generate 'devise:install'
 
 git :add => "."
